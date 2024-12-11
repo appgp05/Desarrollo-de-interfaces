@@ -205,7 +205,7 @@ function guardarOpcionMenuFila(newTr){
                 console.log(0, newTr);
                 actualizarOpcionMenuFila(0, newTr);
                 actualizarIdFila(resultado, 0);
-                document.getElementById('tr0').outerHTML = '';
+                // document.getElementById('tr0').outerHTML = '';
             }
 
             document.getElementById('newTr' + newTr).outerHTML = '';
@@ -239,5 +239,7 @@ function actualizarOpcionMenuFila(tr, newTr){
 }
 
 function actualizarIdFila(id, tr){
+    console.log("Tr a actualizar: " + tr + ", Nuevo id: " + id);
     document.querySelector("#tr" + tr + " > .id").innerHTML = id;
+    document.querySelector("#tr" + tr).id = "tr" + id;
 }
