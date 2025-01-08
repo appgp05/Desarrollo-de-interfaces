@@ -27,7 +27,6 @@ USE `di2024`;
 -- --------------------------------------------------------
 
 DROP TABLE IF EXISTS menu;
-
 CREATE TABLE `menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(255) NOT NULL,
@@ -51,10 +50,11 @@ INSERT INTO `menu` (`id`, `titulo`, `url`, `nivel`, `padre_id`, `orden`, `es_dro
 (6, 'Menu', '#', 2, 4, 2, 0, 'Menu', 'getVistaFiltros', 'capaContenido'),
 (7, 'Something else here', '#', 2, 4, 3, 0, NULL, null, null);
 
-
 --
 -- Estructura de tabla para la tabla `usuarios`
 --
+
+DROP TABLE IF EXISTS usuarios;
 
 CREATE TABLE `usuarios` (
   `id_Usuario` int(11) UNSIGNED NOT NULL,
@@ -134,7 +134,7 @@ INSERT INTO `usuarios` (`id_Usuario`, `nombre`, `apellido_1`, `apellido_2`, `sex
 (259, 'Henriette ', 'Pfalzheim', '', 'H', '2020-02-15', 'Henriette Pfalzheim@2si2024', '64259259', 'Pfalzheim', '202cb962ac59075b964b07152d234b70', 'S'),
 (260, 'Elizabeth ', 'Lincoln', '', 'M', '2020-02-15', 'Elizabeth Lincoln@2si2024', '64260260', 'Lincoln', '202cb962ac59075b964b07152d234b70', 'S'),
 (273, 'Peter ', 'Franken', '', 'H', '2020-02-15', 'Peter Franken@2si2024', '64273273', 'Franken', '202cb962ac59075b964b07152d234b70', 'S'),
-(276, 'Anna', 'O\'Hara', '', 'M', '2020-02-15', 'AnnaO\'Hara@2si2024', '64276276', 'O\'Hara', '202cb962ac59075b964b07152d234b70', 'S'),
+(276, 'Anna', 'O\Hara', '', 'M', '2020-02-15', 'AnnaO\Hara@2si2024', '64276276', 'O\Hara', '202cb962ac59075b964b07152d234b70', 'S'),
 (278, 'Giovanni ', 'Rovelli', '', 'H', '2020-02-15', 'Giovanni Rovelli@2si2024', '64278278', 'Rovelli', '202cb962ac59075b964b07152d234b70', 'S'),
 (282, 'Adrian', 'Huxley', '', 'H', '2020-02-15', 'AdrianHuxley@2si2024', '64282282', 'Huxley', '202cb962ac59075b964b07152d234b70', 'S'),
 (286, 'Marta', 'Hernandez', '', 'M', '2020-02-15', 'MartaHernandez@2si2024', '64286286', 'Hernandez3', '202cb962ac59075b964b07152d234b70', 'N'),
@@ -208,6 +208,40 @@ INSERT INTO `usuarios` (`id_Usuario`, `nombre`, `apellido_1`, `apellido_2`, `sex
 (505, 'xxxx', 'xxxx', 'xxxx', 'H', '2023-11-09', 'xxxxxxxx@2si2024', '', 'xxxxxyy', '0c0b3da4ac402bd86191d959be081114', 'S'),
 (506, 'xxxx', 'xxxx', 'xxxx', 'H', '2023-11-09', 'xxxxxxxx@2si2024', '', 'xxxxxyyz', '0c0b3da4ac402bd86191d959be081114', 'S'),
 (516, 'xxxx', 'xxxx', 'xxxx', 'H', '2023-11-09', 'xxxxxxxx@2si2024', '', 'xxxxxyyzdd', '0c0b3da4ac402bd86191d959be081114', 'S');
+
+DROP TABLE IF EXISTS permisos;
+CREATE TABLE `permisos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `permiso` varchar(255) NOT NULL,
+  `id_Menu` int(11) NOT NULL,
+  `codigo_Permiso` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+INSERT INTO `permisos` (`id`, `permiso`, `id_Menu`, `codigo_Permiso`) VALUES
+(1, 'accesoMenu', 6, 'ACS_M');
+
+DROP TABLE IF EXISTS permisosusuarios;
+  CREATE TABLE `permisosusuarios` (
+  `id_Usuario`,
+  `id_Permiso`
+);
+
+DROP TABLE IF EXISTS permisosroles;
+CREATE TABLE `permisosroles` (
+  `id_Rol`,
+  `id_Permiso`
+);
+
+DROP TABLE IF EXISTS roles;
+CREATE TABLE `roles` (
+  `id`
+);
+
+DROP TABLE IF EXISTS rolesusuarios;
+CREATE TABLE `rolesusuarios` (
+  `id_Usuario`,
+  `id_rol`
+);
 
 --
 -- Índices para tablas volcadas
