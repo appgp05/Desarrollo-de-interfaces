@@ -34,6 +34,23 @@ function añadirFila(id, originalTrId){
     tablaMenu.insertBefore(newTr, originalTr.nextSibling);
 }
 
+function añadirFilaPermisos(id, originalTrId){
+    // if(document.getElementById("newPermissionTr" + id) !== null && document.getElementById("newPermissionTr" + id) !== ''){
+    //     document.getElementById("newPermissionTr" + id).outerHTML = '';
+    // }
+
+    console.log("llego " + id + " " + originalTrId);
+    const tablaMenu = document.getElementById("tablaMenu");
+    const originalTr = document.getElementById('tr' + originalTrId);
+
+    const newTr = document.createElement("tr");
+
+    newTr.id = "permissionTr" + id;
+    newTr.innerHTML = `<td><input type="text" placeholder="Permiso"><input type="text" placeholder="Código permiso"><button>Añadir permiso</button></td>`;
+
+    tablaMenu.insertBefore(newTr, originalTr.nextSibling);
+}
+
 function obtenerVista_EditarCrearMenu(controlador, metodo, destino, id, nivel, padre_id, orden){
     // console.log("llegooo");
     let opciones = { method: "GET", };
@@ -242,4 +259,19 @@ function actualizarIdFila(id, tr){
     console.log("Tr a actualizar: " + tr + ", Nuevo id: " + id);
     document.querySelector("#tr" + tr + " > .id").innerHTML = id;
     document.querySelector("#tr" + tr).id = "tr" + id;
+}
+
+function actualizarPermisosOpcionesMenuFila(){
+    console.log("llego");
+    const opcionesMenu = document.querySelectorAll('#tablaMenu > tr');
+    opcionesMenu.forEach(opcionMenu => {
+        console.log("Opcion: " + opcionMenu.id)
+        const id = menuOption.id.substring(2);
+        console.log("id: " + id);
+        añadirFilaPermisos(id, id)
+    });
+}
+
+function actualizarPermisosOpcionMenuFila(){
+    
 }

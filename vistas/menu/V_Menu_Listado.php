@@ -1,5 +1,4 @@
 <?php
-include 'permisos.php';
 //$usuarios=$datos['usuarios'];
 $opcionesMenu=array();
 extract($datos);
@@ -65,11 +64,15 @@ $html.='<thead>
                 }
     $html.='<td><button class="btn btn-outline-primary" onclick="añadirFila('.$fila['id'].', '.$fila['id'].'); obtenerVista_EditarCrearMenuFila(\'Menu\', \'getVistaNuevoEditarFila\', \'newTr'.$fila['id'].'\', \''.$fila['id'].'\', \'\', \'\', \'\', \''.$fila['id'].'\'); obtenerVista_EditarCrearMenu(\'Menu\', \'getVistaNuevoEditar\', \'capaEditarCrear\', \''.$fila['id'].'\', \'\', \'\', \'\')">Editar</button></td>
             </tr>';
-    $html.='<tr></tr>';
+    // $html.='<tr><td>Fila 1</td></tr>';
+    
+    // $html.='<tr id="trPermisos"'.$fila['id'].'><td></td></tr>';
+    
 }
 
 $html.='</tbody>
 </table></div>';
 
 echo $html;
+;
 ?>
