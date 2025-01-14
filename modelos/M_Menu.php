@@ -48,7 +48,13 @@ class M_Menu extends Modelo{
         $SQL.=' ORDER BY nivel, orden';
 
         $opcionesMenu = $this->DAO->consultar($SQL);
-        
+
+        foreach($opcionesMenu as $opcionMenu){
+            $SQL = "SELECT * FROM `permisos` WHERE id_Menu = " .$opcionMenu['id'];
+            $permisosOpcionesMenu = $this->DAO->consultar($SQL);
+            $opcionMenu['permisosOpcionMenu'] = $permisosOpcionesMenu;
+            echo $permisosOpcionesMenu.[1].['id'];
+        }
 
         return $opcionesMenu;
     }

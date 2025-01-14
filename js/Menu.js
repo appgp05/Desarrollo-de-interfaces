@@ -261,12 +261,12 @@ function actualizarIdFila(id, tr){
     document.querySelector("#tr" + tr).id = "tr" + id;
 }
 
-function actualizarPermisosOpcionesMenuFila(){
+function mostrarPermisosOpcionesMenuFila(){
     console.log("llego");
     const opcionesMenu = document.querySelectorAll('#tablaMenu > tr');
     opcionesMenu.forEach(opcionMenu => {
         console.log("Opcion: " + opcionMenu.id)
-        const id = menuOption.id.substring(2);
+        const id = opcionMenu.id.substring(2);
         console.log("id: " + id);
         añadirFilaPermisos(id, id)
     });

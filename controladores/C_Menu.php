@@ -22,6 +22,7 @@
         public function getVistaListadoOpcionesMenu($filtros=array()){
             // var_dump($filtros);
             $opcionesMenu=$this->modelo->buscarOpcionesMenu($filtros);
+            // añadirPermisosOpcionesMenuFila();
             Vista::render('vistas/menu/V_Menu_Listado.php',array('opcionesMenu'=>$opcionesMenu));
         }
 

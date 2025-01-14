@@ -1,4 +1,5 @@
 <?php
+require_once 'vistas\menu\V_Menu_PermisosOpcionfila.php';
 //$usuarios=$datos['usuarios'];
 $opcionesMenu=array();
 extract($datos);
@@ -64,6 +65,9 @@ $html.='<thead>
                 }
     $html.='<td><button class="btn btn-outline-primary" onclick="añadirFila('.$fila['id'].', '.$fila['id'].'); obtenerVista_EditarCrearMenuFila(\'Menu\', \'getVistaNuevoEditarFila\', \'newTr'.$fila['id'].'\', \''.$fila['id'].'\', \'\', \'\', \'\', \''.$fila['id'].'\'); obtenerVista_EditarCrearMenu(\'Menu\', \'getVistaNuevoEditar\', \'capaEditarCrear\', \''.$fila['id'].'\', \'\', \'\', \'\')">Editar</button></td>
             </tr>';
+
+    $V_Menu_PermisosOpcionfila = new V_Menu_PermisosOpcionfila();
+    $html.= $V_Menu_PermisosOpcionfila->getPermisosOpcionMenuFila($fila['id'], $fila['permisosOpcionMenu']);
     // $html.='<tr><td>Fila 1</td></tr>';
     
     // $html.='<tr id="trPermisos"'.$fila['id'].'><td></td></tr>';
