@@ -5,19 +5,19 @@ class V_Menu_PermisosOpcionfila{
         // $newTr.innerHTML = ``;
 
         $html = "";
-        $html .= `<tr id="permissionTr$id">`;
-        $html .= `  <td>
+        $html .= '<tr id="permissionTr$id">';
+        $html .= '  <td>
                         <input type="text" placeholder="Permiso">
                         <input type="text" placeholder="Código permiso">
                         <button>Añadir permiso</button>
-                    </td>`;
+                    </td>';
 
-        $html .= `<td colspan="4">`;
+        $html .= '<td colspan="4">';
 
-        foreach ($permisos as $key => $permiso) {
-            $html.=`
-                Id: `.$permiso['id'].`, Permiso: `.$permiso['permiso'].`, Menu: `.$permiso['id_Menu'].`, Código: `.$permiso['codigo_Permiso'].` <button>Editar</button><button>Eliminar</button><br>
-            `;
+        foreach ($permisos as $permiso) {
+            $html.="
+                <p>Id: ".$permiso['id'].", Permiso: ".$permiso['permiso'].", Menu: ".$permiso['id_Menu'].", Código: ".$permiso['codigo_Permiso']."</p><button>Editar</button><button>Eliminar</button><br>
+            ";
         }
         $html .= '</td>';
         $html .= '</tr>';

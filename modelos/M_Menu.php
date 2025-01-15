@@ -15,6 +15,7 @@ class M_Menu extends Modelo{
 
         // echo $SQL;
         // $id_Usuario='';
+        // print_r($menu);
         return $menu;
     }
 
@@ -49,12 +50,19 @@ class M_Menu extends Modelo{
 
         $opcionesMenu = $this->DAO->consultar($SQL);
 
-        foreach($opcionesMenu as $opcionMenu){
-            $SQL = "SELECT * FROM `permisos` WHERE id_Menu = " .$opcionMenu['id'];
-            $permisosOpcionesMenu = $this->DAO->consultar($SQL);
-            $opcionMenu['permisosOpcionMenu'] = $permisosOpcionesMenu;
-            echo $permisosOpcionesMenu.[1].['id'];
+        foreach($opcionesMenu as $key => $opcionMenu){
+            $SQL = "SELECT * FROM `permisos` WHERE id_Menu = ".$opcionMenu['id']." ORDER BY id ASC";
+            // echo $SQL;
+            $permisosOpcionMenu = $this->DAO->consultar($SQL);
+            // echo sizeof($permisosOpcionesMenu);
+            if(!empty($permisosOpcionMenu)){
+                $opcionesMenu[$key]['permisosOpcionMenu'] = $permisosOpcionMenu;
+            }
         }
+        
+        // echo('<pre>');
+        // print_r($opcionesMenu);
+        // echo('</pre>');
 
         return $opcionesMenu;
     }
@@ -136,6 +144,53 @@ class M_Menu extends Modelo{
                 destinoMenu='$destinoMenu'
                 WHERE id = '$id'";
         return $this->DAO->actualizar($SQL);
+    }
+
+
+    public function insertarPermisoOpcionMenu($datos=Array()){
+        $id='';
+        $permiso='';
+        $id_Menu='';
+        $codigo_Permiso='';
+        extract($datos);
+        
+        $SQL="INSERT INTO menu SET
+                titulo='$titulo',
+                url='$url',";
+            $SQL.="nivel='$nivel',";
+
+        $SQL.="padre_id='$padre_id',
+                orden='$orden',
+                es_dropdown='$es_dropdown',
+                controladorMenu='$controladorMenu',
+                metodoMenu='$metodoMenu',
+                destinoMenu='$destinoMenu'";
+
+        return $this->DAO->insertar($SQL);
+    }
+
+    public function editarPermisoOpcionMenu($datos=Array()){
+        $id='';
+        $permiso='';
+        $id_Menu='';
+        $codigo_Permiso='';
+        extract($datos);
+        
+        $SQL="UPDATE permisos SET
+                id='$id',
+                permiso='$permiso',
+                id_Menu='$id_Menu',
+                codigo_Permiso='$codigo_Permiso'
+                WHERE id = '$id'";
+        return $this->DAO->actualizar($SQL);
+    }
+
+    public function eliminarPermisoOpcionMenu($datos=Array()){
+        $id='';
+        extract($datos);
+        
+        $SQL="DELETE FROM `permisos` WHERE id = ".$id;
+        return $this->DAO->borrar($SQL);
     }
 }
 ?>
