@@ -5,11 +5,13 @@ class V_Menu_PermisosOpcionfila{
         // $newTr.innerHTML = ``;
 
         $html = "";
-        $html .= '<tr id="permissionTr$id">';
+        $html .= '<tr id="permissionTr'.$id.'">';
         $html .= '  <td>
-                        <input type="text" placeholder="Permiso">
-                        <input type="text" placeholder="Código permiso">
-                        <button>Añadir permiso</button>
+                        <form class="formularioEdicion" name="formularioEdicion">
+                            <input type="text" id="permiso" name="permiso" placeholder="Permiso">
+                            <input type="text" id="codigo_Permiso" name="codigo_Permiso" placeholder="Código permiso">
+                            <button onclick="guardarPermisoOpcionMenuFila('.$id.')">Añadir permiso</button>
+                        </form>
                     </td>';
 
         $html .= '<td colspan="4">';

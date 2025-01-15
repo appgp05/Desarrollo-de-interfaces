@@ -108,5 +108,28 @@
             }
             echo json_encode($id);
         }
+
+        public function guardarPermisoOpcionMenuFila($datos=array()){
+            $respuesta['correcto']='S';
+            $respuesta['msj']='Creado correctamente.';
+
+            if(isset($datos['id']) && $datos['id'] !== null && $datos['id'] !== ''){
+                // echo "<script>console.log(\"Opcion Menu Editada\")</script>";
+                $id=$this->modelo->editarOpcionMenu($datos);
+            } else {
+                // echo "<script>console.log(\"Opcion Menu Insertada\")</script>";
+                $this->modelo->actualizarOpcionesPorDebajoMenu($datos);
+                $id=$this->modelo->insertarOpcionMenu($datos);
+            }
+
+
+            if($id>0){
+                //nada, ok
+            } else {
+                $respuesta['correcto']='N';
+                $respuesta['msj']='Error al crear.';
+            }
+            echo json_encode($id);
+        }
     }
 ?>
