@@ -154,17 +154,11 @@ class M_Menu extends Modelo{
         $codigo_Permiso='';
         extract($datos);
         
-        $SQL="INSERT INTO menu SET
-                titulo='$titulo',
-                url='$url',";
-            $SQL.="nivel='$nivel',";
-
-        $SQL.="padre_id='$padre_id',
-                orden='$orden',
-                es_dropdown='$es_dropdown',
-                controladorMenu='$controladorMenu',
-                metodoMenu='$metodoMenu',
-                destinoMenu='$destinoMenu'";
+        $SQL="INSERT INTO permisos SET
+                id='$id',
+                permiso='$permiso',
+                id_Menu='$id_Menu',
+                codigo_Permiso='$codigo_Permiso'";
 
         return $this->DAO->insertar($SQL);
     }
