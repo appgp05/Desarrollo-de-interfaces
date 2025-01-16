@@ -122,7 +122,7 @@
                         $respuesta['correcto']='N';
                         $respuesta['msj']='Error al crear.';
                     }
-                    echo json_encode($id);
+                    // echo json_encode($id);
                     break;
                 case 'editar':
                     $this->modelo->editarPermisoOpcionMenu($datos);
@@ -131,6 +131,8 @@
                     $this->modelo->eliminarPermisoOpcionMenu($datos);
                     break;
             }
+
+            echo json_encode($this->modelo->getPermisosOpcionMenu($datos['id_Menu']));
 
             // if(isset($datos['id']) && $datos['id'] !== null && $datos['id'] !== ''){
             //     // echo "<script>console.log(\"Opcion Menu Editada\")</script>";
@@ -141,5 +143,10 @@
             //     $id=$this->modelo->insertarPermisoOpcionMenu($datos);
             // }
         }
+
+        // public function getPermisosOpcionMenuFila($id, $permisos){
+        //     require_once 'vistas\menu\V_Menu_PermisosOpcionfila.php';
+        //     $V_Menu_PermisosOpcionfila = new V_Menu_PermisosOpcionfila()
+        // }
     }
 ?>

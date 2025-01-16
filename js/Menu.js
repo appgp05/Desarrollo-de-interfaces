@@ -237,7 +237,7 @@ function guardarOpcionMenuFila(newTr){
 function guardarPermisoOpcionMenuFila(newPermisoTr, accion){
     console.log('guardando');
     let opciones = { method: "GET", };
-    let parametros = "controlador=Menu&metodo=guardarPermisoOpcionMenuFila&accion=" + accion;
+    let parametros = "controlador=Menu&metodo=guardarPermisoOpcionMenuFila&accion=" + accion + "&id_Menu=" + newPermisoTr;
     
     if(accion !== 'eliminar'){
         const formularios = document.querySelectorAll('#permissionTr' + newPermisoTr + ' .formularioEdicion');
@@ -260,6 +260,16 @@ function guardarPermisoOpcionMenuFila(newPermisoTr, accion){
             throw new Error(res.status);
         })
         .then(resultado=>{
+            // console.log(resultado);
+
+            // resultado = JSON.parse(resultado);
+            // console.log("llego")
+            actualizarPermisosOpcionMenuFila(newPermisoTr, resultado)
+
+
+            // actualizarPermisosOpcionMenuFila(newPermisoTr, permisos);
+
+            
 
             // var editar = false;
 
@@ -329,6 +339,36 @@ function guardarPermisoOpcionMenuFila(newPermisoTr, accion){
         })
 }
 
+function actualizarPermisosOpcionMenuFila(id, permisos){
+    
+    let html = "";
+    html += '<tr id="permissionTr'+id+'">';
+    html += `  <td>
+                    <form class="formularioEdicion" name="formularioEdicion">
+                        <input type="text" id="permiso" name="permiso" placeholder="Permiso">
+                        <input type="text" id="codigo_Permiso" name="codigo_Permiso" placeholder="Código permiso">
+                        <button type="button" onclick="guardarPermisoOpcionMenuFila(`+id+`, 'insertar')">Añadir permiso</button>
+                    </form>
+                </td>`;
+
+    html += '<td colspan="4">';
+
+    // if(permisos){
+    //     html+='No existen permisos';
+    // } else {
+        permisos.forEach(permiso => {
+            html+=`
+                <p>Id: ${permiso['id']}, Permiso: ${permiso['permiso']}, Menu: ${permiso['id_Menu']}, Código: ${permiso['codigo_Permiso']}</p><button>Editar</button><button type="button" onclick="guardarPermisoOpcionMenuFila(${id}, 'eliminar')">Eliminar</button><br>
+            `;
+        });
+    
+    html += '</td>';
+    html += '</tr>';
+    // console.log("llego", document.getElementById('permissionTr' + id).outerHTML);
+    document.getElementById('permissionTr' + id).outerHTML = html;
+// }
+}
+
 function actualizarOpcionMenuFila(tr, newTr){
     // parametros = '';
     // const formularios = document.querySelectorAll('#newTr' + tr + ' .formularioEdicion');
@@ -365,8 +405,4 @@ function mostrarPermisosOpcionesMenuFila(){
         console.log("id: " + id);
         añadirFilaPermisos(id, id)
     });
-}
-
-function actualizarPermisosOpcionMenuFila(){
-    
 }
