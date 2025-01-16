@@ -234,7 +234,7 @@ function guardarOpcionMenuFila(newTr){
         })
 }
 
-function guardarPermisoOpcionMenuFila(newPermisoTr, accion){
+function guardarPermisoOpcionMenuFila(newPermisoTr, accion, idPermiso){
     console.log('guardando');
     let opciones = { method: "GET", };
     let parametros = "controlador=Menu&metodo=guardarPermisoOpcionMenuFila&accion=" + accion + "&id_Menu=" + newPermisoTr;
@@ -249,7 +249,7 @@ function guardarPermisoOpcionMenuFila(newPermisoTr, accion){
             console.log(parametros);
         });
     } else {
-        parametros += '&id=' + newPermisoTr;
+        parametros += '&id=' + idPermiso;
     }
     console.log("Parametros: " + parametros);
     fetch("C_Frontal.php?" + parametros, opciones)
@@ -358,7 +358,7 @@ function actualizarPermisosOpcionMenuFila(id, permisos){
     // } else {
         permisos.forEach(permiso => {
             html+=`
-                <p>Id: ${permiso['id']}, Permiso: ${permiso['permiso']}, Menu: ${permiso['id_Menu']}, Código: ${permiso['codigo_Permiso']}</p><button>Editar</button><button type="button" onclick="guardarPermisoOpcionMenuFila(${id}, 'eliminar')">Eliminar</button><br>
+                <p>Id: ${permiso['id']}, Permiso: ${permiso['permiso']}, Menu: ${permiso['id_Menu']}, Código: ${permiso['codigo_Permiso']}</p><button>Editar</button><button type="button" onclick="guardarPermisoOpcionMenuFila(${id}, 'eliminar', ${permiso['id']})">Eliminar</button><br>
             `;
         });
     
