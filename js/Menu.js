@@ -234,17 +234,23 @@ function guardarOpcionMenuFila(newTr){
         })
 }
 
-function guardarPermisoOpcionMenuFila(newPermisoTr){
+function guardarPermisoOpcionMenuFila(newPermisoTr, accion){
     console.log('guardando');
     let opciones = { method: "GET", };
-    let parametros = "controlador=Menu&metodo=guardarPermisoOpcionMenuFila";
-    const formularios = document.querySelectorAll('#permissionTr' + newPermisoTr + ' .formularioEdicion');
-    formularios.forEach(formulario => {
-        parametros+='&'+new URLSearchParams(
-            new FormData(formulario)).toString();
-            console.log("FormData: " + new URLSearchParams(
-                new FormData(formulario)).toString());
-    });
+    let parametros = "controlador=Menu&metodo=guardarPermisoOpcionMenuFila&accion=" + accion;
+    
+    if(accion !== 'eliminar'){
+        const formularios = document.querySelectorAll('#permissionTr' + newPermisoTr + ' .formularioEdicion');
+        formularios.forEach(formulario => {
+            parametros+='&'+new URLSearchParams(
+                new FormData(formulario)).toString();
+                // console.log("FormData: " + new URLSearchParams(
+                //     new FormData(formulario)).toString());
+            console.log(parametros);
+        });
+    } else {
+        parametros += '&id=' + newPermisoTr;
+    }
     console.log("Parametros: " + parametros);
     fetch("C_Frontal.php?" + parametros, opciones)
         .then(res=>{
@@ -255,66 +261,66 @@ function guardarPermisoOpcionMenuFila(newPermisoTr){
         })
         .then(resultado=>{
 
-            var editar = false;
+            // var editar = false;
 
-            if(document.querySelector('#newTr' + newTr + ' .formularioEdicion > #id')){
-                console.log("editarA")
-                editar = true;
-                const id = document.querySelector('#newTr' + newTr + ' .formularioEdicion > #id');
-            } else {
-                console.log("crearA")
-                editar = false;
-            }
+            // if(document.querySelector('#newTr' + newTr + ' .formularioEdicion > #id')){
+            //     console.log("editarA")
+            //     editar = true;
+            //     const id = document.querySelector('#newTr' + newTr + ' .formularioEdicion > #id');
+            // } else {
+            //     console.log("crearA")
+            //     editar = false;
+            // }
 
-            if(editar){
-                actualizarOpcionMenuFila(newTr, newTr);
-            } else {
-                // añadirFila(0, newTr);
+            // if(editar){
+            //     actualizarOpcionMenuFila(newTr, newTr);
+            // } else {
+            //     // añadirFila(0, newTr);
 
-                let id = 0;
-                let originalTrId = newTr;
+            //     let id = 0;
+            //     let originalTrId = newTr;
 
-                if(document.getElementById("newTr" + id) !== null && document.getElementById("newTr" + id) !== ''){
-                    document.getElementById("newTr" + id).outerHTML = '';
-                }
+            //     if(document.getElementById("newTr" + id) !== null && document.getElementById("newTr" + id) !== ''){
+            //         document.getElementById("newTr" + id).outerHTML = '';
+            //     }
             
-                console.log("llego " + id + " " + originalTrId);
-                const tablaMenu = document.getElementById("tablaMenu");
-                const originalTr = document.getElementById('tr' + originalTrId);
+            //     console.log("llego " + id + " " + originalTrId);
+            //     const tablaMenu = document.getElementById("tablaMenu");
+            //     const originalTr = document.getElementById('tr' + originalTrId);
             
-                const newTrr = document.createElement("tr");
+            //     const newTrr = document.createElement("tr");
             
-                if(id==0){
-                    newTrr.id = "tr" + id;
-                } else {
-                    newTrr.id = "newTr" + id;
-                }
+            //     if(id==0){
+            //         newTrr.id = "tr" + id;
+            //     } else {
+            //         newTrr.id = "newTr" + id;
+            //     }
             
-                if(id==0){
+            //     if(id==0){
             
-                    newTrr.innerHTML = `
-                    <td class="id">'.$fila['id'].'</td>
-                    <td class="titulo">'.$fila['titulo'].'</td>
-                    <td class="url">'.$fila['url'].'</td>
-                    <td class="nivel">'.$fila['nivel'].'</td>
-                    <td class="padre_id">'.$fila['padre_id'].'</td>
-                    <td class="orden">'.$fila['orden'].'</td>
-                    <td class="es_dropdown">'.$fila['es_dropdown'].'</td>
-                    <td class="controladorMenu">'.$fila['controladorMenu'].'</td>
-                    <td class="metodoMenu">'.$fila['metodoMenu'].'</td>
-                    <td class="destinoMenu">'.$fila['destinoMenu'].'</td>
-                    `;
-                }
+            //         newTrr.innerHTML = `
+            //         <td class="id">'.$fila['id'].'</td>
+            //         <td class="titulo">'.$fila['titulo'].'</td>
+            //         <td class="url">'.$fila['url'].'</td>
+            //         <td class="nivel">'.$fila['nivel'].'</td>
+            //         <td class="padre_id">'.$fila['padre_id'].'</td>
+            //         <td class="orden">'.$fila['orden'].'</td>
+            //         <td class="es_dropdown">'.$fila['es_dropdown'].'</td>
+            //         <td class="controladorMenu">'.$fila['controladorMenu'].'</td>
+            //         <td class="metodoMenu">'.$fila['metodoMenu'].'</td>
+            //         <td class="destinoMenu">'.$fila['destinoMenu'].'</td>
+            //         `;
+            //     }
             
-                tablaMenu.insertBefore(newTrr, originalTr.nextSibling);
+            //     tablaMenu.insertBefore(newTrr, originalTr.nextSibling);
 
-                console.log(0, newTr);
-                actualizarOpcionMenuFila(0, newTr);
-                actualizarIdFila(resultado, 0);
-                // document.getElementById('tr0').outerHTML = '';
-            }
+            //     console.log(0, newTr);
+            //     actualizarOpcionMenuFila(0, newTr);
+            //     actualizarIdFila(resultado, 0);
+            //     // document.getElementById('tr0').outerHTML = '';
+            // }
 
-            document.getElementById('newTr' + newTr).outerHTML = '';
+            // document.getElementById('newTr' + newTr).outerHTML = '';
             
             
         })
