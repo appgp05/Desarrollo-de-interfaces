@@ -248,6 +248,10 @@ function guardarPermisoOpcionMenuFila(newPermisoTr, accion, idPermiso){
                 //     new FormData(formulario)).toString());
             console.log(parametros);
         });
+
+        if(accion === 'editar'){
+            parametros += '&id=' + idPermiso;
+        }
     } else {
         parametros += '&id=' + idPermiso;
     }
@@ -358,7 +362,7 @@ function actualizarPermisosOpcionMenuFila(id, permisos){
     // } else {
         permisos.forEach(permiso => {
             html+=`
-                <p>Id: ${permiso['id']}, Permiso: ${permiso['permiso']}, Menu: ${permiso['id_Menu']}, Código: ${permiso['codigo_Permiso']}</p><button>Editar</button><button type="button" onclick="guardarPermisoOpcionMenuFila(${id}, 'eliminar', ${permiso['id']})">Eliminar</button><br>
+                <p>Id: ${permiso['id']}, Permiso: ${permiso['permiso']}, Menu: ${permiso['id_Menu']}, Código: ${permiso['codigo_Permiso']}</p><button onclick="abrirEdicionPermisoOpcionMenuFila(${id} , '${permiso['permiso']}', '${permiso['codigo_Permiso']}', ${permiso['id']})">Editar</button><button type="button" onclick="guardarPermisoOpcionMenuFila(${id}, 'eliminar', ${permiso['id']})">Eliminar</button><br>
             `;
         });
     
@@ -367,6 +371,19 @@ function actualizarPermisosOpcionMenuFila(id, permisos){
     // console.log("llego", document.getElementById('permissionTr' + id).outerHTML);
     document.getElementById('permissionTr' + id).outerHTML = html;
 // }
+}
+
+function abrirEdicionPermisoOpcionMenuFila(id, permiso, codigoPermiso, idPermiso){
+    document.querySelector('#permissionTr'+id+' .formularioEdicion').innerHTML = `<input type="text" id="permiso" name="permiso" value="`+permiso+`">
+        <input type="text" id="codigo_Permiso" name="codigo_Permiso" value="`+codigoPermiso+`">
+        <button type="button" onclick="guardarPermisoOpcionMenuFila(`+id+`, 'editar', `+idPermiso+`)">Aplicar</button>
+        <button type="button" onclick="cerrarEdicionPermisoOpcionMenuFila(`+id+`)">Cancelar</button>`;
+}
+
+function cerrarEdicionPermisoOpcionMenuFila(permissionTr){
+    document.querySelector('#permissionTr'+permissionTr+' .formularioEdicion').innerHTML = `<input type="text" id="permiso" name="permiso" placeholder="Permiso">
+        <input type="text" id="codigo_Permiso" name="codigo_Permiso" placeholder="Código permiso">
+        <button type="button" onclick="guardarPermisoOpcionMenuFila(`+permissionTr+`, 'insertar')">Añadir permiso</button>`
 }
 
 function actualizarOpcionMenuFila(tr, newTr){

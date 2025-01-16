@@ -175,9 +175,7 @@ class M_Menu extends Modelo{
         extract($datos);
         
         $SQL="UPDATE permisos SET
-                id='$id',
                 permiso='$permiso',
-                id_Menu='$id_Menu',
                 codigo_Permiso='$codigo_Permiso'
                 WHERE id = '$id'";
         return $this->DAO->actualizar($SQL);
