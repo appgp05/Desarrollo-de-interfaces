@@ -21,7 +21,7 @@ class V_Menu_PermisosOpcionfila{
         } else {
             foreach ($permisos as $permiso) {
                 $html.="
-                    <p>Id: ".$permiso['id'].", Permiso: ".$permiso['permiso'].", Menu: ".$permiso['id_Menu'].", Código: ".$permiso['codigo_Permiso']."</p><button>Editar</button><button type=".'"button"'." onclick=".'"guardarPermisoOpcionMenuFila('.$id.', '."'eliminar'".', '.$permiso['id'].')"'.">Eliminar</button><br>
+                    <p>Id: ".$permiso['id'].", Permiso: ".$permiso['permiso'].", Menu: ".$permiso['id_Menu'].", Código: ".$permiso['codigo_Permiso']."</p><button onclick=".'"abrirEdicionPermisoOpcionMenuFila('.$id.' , '."'".$permiso['permiso']."'".' , '."'".$permiso['codigo_Permiso']."'".' , '.$permiso['id'].')"'.">Editar</button><button type=".'"button"'." onclick=".'"guardarPermisoOpcionMenuFila('.$id.', '."'eliminar'".', '.$permiso['id'].')"'.">Eliminar</button><br>
                 ";
             }
         }
