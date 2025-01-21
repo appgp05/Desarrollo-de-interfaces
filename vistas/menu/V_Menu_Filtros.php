@@ -21,7 +21,8 @@
         <div class="form-group col-md-6 col-sm-12">
             <label for="">Usuario:</label>
             <select type="text" id="ftextoUsuario" name="ftextoUsuario"
-                class="form-control" placeholder="Usuario" value="">
+                class="form-control" placeholder="Usuario" value=""
+                onselect="controlarFiltrosMenu('usuario', value)">
                 <option value="0">-</option>
                 <?php
                     foreach($usuarios as $key => $usuario){

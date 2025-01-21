@@ -423,3 +423,11 @@ function mostrarPermisosOpcionesMenuFila(){
         añadirFilaPermisos(id, id)
     });
 }
+
+function controlarFiltrosMenu(filtro, valor){
+    if(filtro === 'usuario'){
+        if(valor != 0){
+            document.getElementById('ftextoRol').disabled=true;
+        }
+    }
+}
