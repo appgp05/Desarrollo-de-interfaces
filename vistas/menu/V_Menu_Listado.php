@@ -1,8 +1,11 @@
 <?php
 require_once 'vistas\menu\V_Menu_PermisosOpcionfila.php';
 //$usuarios=$datos['usuarios'];
+$usuario='';
+$rol='';
 $opcionesMenu=array();
 extract($datos);
+echo 'Usuario: '.$usuario.' Rol: '.$rol;
 
 $html='';
 $html.='<div class="table-responsive">

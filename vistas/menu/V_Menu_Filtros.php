@@ -2,6 +2,12 @@
     $usuarios = [];
     $roles = [];
     extract($datos);
+    // echo '<pre>';
+    // print_r($roles);
+    // echo '</pre>';
+    // echo '<pre>';
+    // print_r($usuarios);
+    // echo '</pre>';
 ?>
 
 <h2>Mtto. de Menu</h2>
@@ -19,7 +25,7 @@
                 <option value="0">-</option>
                 <?php
                     foreach($usuarios as $key => $usuario){
-                        echo '<option>'.$usuario['nombre'].'</option>';
+                        echo '<option value="'.$usuario['id_Usuario'].'">'.$usuario['nombre'].'</option>';
                     };
                 ?>
             </select>
@@ -31,7 +37,7 @@
                 <option value="0">-</option>
                 <?php
                     foreach($roles as $key => $rol){
-                        echo '<option>'.$rol['rol'].'</option>';
+                        echo '<option value="'.$rol['id'].'">'.$rol['rol'].'</option>';
                     };
                 ?>
             </select>

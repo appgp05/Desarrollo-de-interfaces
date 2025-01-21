@@ -190,12 +190,12 @@ class M_Menu extends Modelo{
     }
 
     public function buscarRoles(){
-        $SQL="SELECT * FROM `roles`";
+        $SQL="SELECT * FROM roles";
         return $this->DAO->consultar($SQL);
     }
 
     public function buscarUsuarios(){
-        $SQL="SELECT * FROM `usuarios`";
+        $SQL="SELECT * FROM usuarios";
         return $this->DAO->consultar($SQL);
     }
 }

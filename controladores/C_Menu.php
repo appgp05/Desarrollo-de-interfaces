@@ -18,14 +18,14 @@
         public function getVistaFiltros($datos=array()){
             $usuarios=$this->modelo->buscarUsuarios();
             $roles=$this->modelo->buscarRoles();
-            Vista::render('./vistas/menu/V_Menu_Filtros.php',array('usuarios'=>$usuarios), array('roles'=>$roles));
+            Vista::render('./vistas/menu/V_Menu_Filtros.php', array('usuarios'=>$usuarios, 'roles'=>$roles));
         }
 
         public function getVistaListadoOpcionesMenu($filtros=array()){
             // var_dump($filtros);
             $opcionesMenu=$this->modelo->buscarOpcionesMenu($filtros);
             // añadirPermisosOpcionesMenuFila();
-            Vista::render('vistas/menu/V_Menu_Listado.php',array('opcionesMenu'=>$opcionesMenu));
+            Vista::render('vistas/menu/V_Menu_Listado.php',array('opcionesMenu'=>$opcionesMenu, 'usuario'=>$filtros['ftextoUsuario'], 'rol'=>$filtros['ftextoRol']));
         }
 
         public function getVistaNuevoEditar($datos=array()){
