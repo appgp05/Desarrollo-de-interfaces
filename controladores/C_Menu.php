@@ -16,7 +16,9 @@
         }
 
         public function getVistaFiltros($datos=array()){
-            Vista::render('./vistas/menu/V_Menu_Filtros.php');
+            $usuarios=$this->modelo->buscarUsuarios();
+            $roles=$this->modelo->buscarRoles();
+            Vista::render('./vistas/menu/V_Menu_Filtros.php',array('usuarios'=>$usuarios), array('roles'=>$roles));
         }
 
         public function getVistaListadoOpcionesMenu($filtros=array()){

@@ -1,10 +1,40 @@
+<?php
+    $usuarios = [];
+    $roles = [];
+    extract($datos);
+?>
+
 <h2>Mtto. de Menu</h2>
 <div class="container-fluid" id="capaFiltrosBusqueda">
     <form id="formularioBuscar" name="formularioBuscar">
         <div class="form-group col-md-6 col-sm-12">
             <label for="">Nombre/texto:</label>
             <input type="text" id="ftexto" name="ftexto"
-                class="form-control" placeholder="texto a buscar" value="">
+                class="form-control" placeholder="Texto a buscar" value="">
+        </div>
+        <div class="form-group col-md-6 col-sm-12">
+            <label for="">Usuario:</label>
+            <select type="text" id="ftextoUsuario" name="ftextoUsuario"
+                class="form-control" placeholder="Usuario" value="">
+                <option value="0">-</option>
+                <?php
+                    foreach($usuarios as $key => $usuario){
+                        echo '<option>'.$usuario['nombre'].'</option>';
+                    };
+                ?>
+            </select>
+        </div>
+        <div class="form-group col-md-6 col-sm-12">
+            <label for="">Rol:</label>
+            <select type="text" id="ftextoRol" name="ftextoRol"
+                class="form-control" placeholder="Rol" value="">
+                <option value="0">-</option>
+                <?php
+                    foreach($roles as $key => $rol){
+                        echo '<option>'.$rol['rol'].'</option>';
+                    };
+                ?>
+            </select>
         </div>
         <!-- <div class="form-group col-md-6 col-sm-12">
             <label for="factivo">Estado:</label>
@@ -18,7 +48,7 @@
     <div class="row">
         <div class="col-lg-12">
             <button type="button" class="btn btn-outline-primary"
-            onclick="buscar('Menu', 'getVistaListadoOpcionesMenu', 'formularioBuscar', 'capaResultadoBusqueda')">Buscar</button>
+            onclick="buscar('Menu', 'getVistaListadoOpcionesMenu', 'formularioBuscar', 'capaResultadoBusqueda', '')">Buscar</button>
             <!-- <button type="button" class="btn btn-outline-secondary"
             onclick="obtenerVista_EditarCrear('Usuarios', 'getVistaNuevoEditar', 'capaEditarCrear', '')">Nuevo</button> -->
         </div>

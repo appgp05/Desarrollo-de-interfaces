@@ -222,25 +222,33 @@ INSERT INTO `permisos` (`id`, `permiso`, `id_Menu`, `codigo_Permiso`) VALUES
 
 DROP TABLE IF EXISTS permisosusuarios;
   CREATE TABLE `permisosusuarios` (
-  `id_Usuario`,
-  `id_Permiso`
+  `id_Usuario` int(11) NOT NULL,
+  `id_Permiso` int(11) NOT NULL
 );
 
 DROP TABLE IF EXISTS permisosroles;
 CREATE TABLE `permisosroles` (
-  `id_Rol`,
-  `id_Permiso`
+  `id_Rol` int(11) NOT NULL,
+  `id_Permiso` int(11) NOT NULL
 );
 
 DROP TABLE IF EXISTS roles;
 CREATE TABLE `roles` (
-  `id`
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `rol` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
 );
+INSERT INTO `roles` (`rol`) VALUES
+('rol1');
+INSERT INTO `roles` (`rol`) VALUES
+('rol2');
+INSERT INTO `roles` (`rol`) VALUES
+('rol3');
 
 DROP TABLE IF EXISTS rolesusuarios;
 CREATE TABLE `rolesusuarios` (
-  `id_Usuario`,
-  `id_rol`
+  `id_Usuario` int(11) NOT NULL,
+  `id_rol` int(11) NOT NULL
 );
 
 --
