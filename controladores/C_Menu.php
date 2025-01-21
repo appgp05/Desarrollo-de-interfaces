@@ -24,8 +24,9 @@
         public function getVistaListadoOpcionesMenu($filtros=array()){
             // var_dump($filtros);
             $opcionesMenu=$this->modelo->buscarOpcionesMenu($filtros);
+            $permisos=$this->modelo->getPermisos();
             // añadirPermisosOpcionesMenuFila();
-            Vista::render('vistas/menu/V_Menu_Listado.php',array('opcionesMenu'=>$opcionesMenu, 'usuario'=>$filtros['ftextoUsuario'], 'rol'=>$filtros['ftextoRol']));
+            Vista::render('vistas/menu/V_Menu_Listado.php',array('opcionesMenu'=>$opcionesMenu, 'usuario'=>$filtros['ftextoUsuario'], 'rol'=>$filtros['ftextoRol'], 'permisos'=>$permisos));
         }
 
         public function getVistaNuevoEditar($datos=array()){

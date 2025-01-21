@@ -146,6 +146,11 @@ class M_Menu extends Modelo{
         return $this->DAO->actualizar($SQL);
     }
 
+    public function getPermisos(){
+        $SQL="SELECT * FROM permisos";
+        return $this->DAO->consultar($SQL);
+    }
+
     public function getPermisosOpcionMenu($id_Menu){
         $SQL="SELECT * FROM permisos WHERE id_Menu = ".$id_Menu;
         return $this->DAO->consultar($SQL);
