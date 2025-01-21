@@ -25,13 +25,15 @@ $html.='<thead>
                 <th>Dropdown</th>
                 <th>Controlador</th>
                 <th>Metodo</th>
-                <th>Destino</th>
-                <th>Añadir por debajo</th>
+                <th>Destino</th>';
+    if($usuario == 0 && $rol == 0){
+        $html.='<th>Añadir por debajo</th>
                 <th>Añadir hijo</th>
-                <th>Editar</th>
-            </tr>
-        </thead>
-        <tbody id="tablaMenu">';
+                <th>Editar</th>';
+    }
+        $html.='</tr>
+                </thead>
+                <tbody id="tablaMenu">';
     // $activo='';
     foreach($opcionesMenu as $posicion=>$fila){
     // echo $fila['nombre'];
@@ -62,16 +64,20 @@ $html.='<thead>
                 <td class="es_dropdown">'.$fila['es_dropdown'].'</td>
                 <td class="controladorMenu">'.$fila['controladorMenu'].'</td>
                 <td class="metodoMenu">'.$fila['metodoMenu'].'</td>
-                <td class="destinoMenu">'.$fila['destinoMenu'].'</td>
-                <td><button class="btn btn-outline-primary" onclick="añadirFila('.$fila['id'].', '.$fila['id'].'); obtenerVista_EditarCrearMenuFila(\'Menu\', \'getVistaNuevoEditarFila\', \'newTr'.$fila['id'].'\', \'\', \''.$fila['nivel'].'\', \''.$fila['padre_id'].'\', \''.($fila['orden'] + 1).'\', \''.$fila['id'].'\'); obtenerVista_EditarCrearMenu(\'Menu\', \'getVistaNuevoEditar\', \'capaEditarCrear\', \'\', \''.$fila['nivel'].'\', \''.$fila['padre_id'].'\', \''.($fila['orden'] + 1).'\')">Añadir por debajo</button></td>
-                ';
-                if($fila['es_dropdown'] == 1){
-                    $html.='<td><button class="btn btn-outline-primary" onclick="añadirFila('.$fila['id'].', '.$fila['id'].'); obtenerVista_EditarCrearMenuFila(\'Menu\', \'getVistaNuevoEditarFila\', \'newTr'.$fila['id'].'\', \'\', \''.($fila['nivel'] + 1).'\', \''.$fila['id'].'\', \'1\', \''.$fila['id'].'\'); obtenerVista_EditarCrearMenu(\'Menu\', \'getVistaNuevoEditar\', \'capaEditarCrear\', \'\', \''.($fila['nivel'] + 1).'\', \''.$fila['id'].'\', \'1\')">Añadir hijo</button></td>';
-                } else {
-                    $html.='<td></td>';
-                }
-    $html.='<td><button class="btn btn-outline-primary" onclick="añadirFila('.$fila['id'].', '.$fila['id'].'); obtenerVista_EditarCrearMenuFila(\'Menu\', \'getVistaNuevoEditarFila\', \'newTr'.$fila['id'].'\', \''.$fila['id'].'\', \'\', \'\', \'\', \''.$fila['id'].'\'); obtenerVista_EditarCrearMenu(\'Menu\', \'getVistaNuevoEditar\', \'capaEditarCrear\', \''.$fila['id'].'\', \'\', \'\', \'\')">Editar</button></td>
-            </tr>';
+                <td class="destinoMenu">'.$fila['destinoMenu'].'</td>';
+
+    if($rol == 0 && $usuario == 0){
+        $html.='<td><button class="btn btn-outline-primary" onclick="añadirFila('.$fila['id'].', '.$fila['id'].'); obtenerVista_EditarCrearMenuFila(\'Menu\', \'getVistaNuevoEditarFila\', \'newTr'.$fila['id'].'\', \'\', \''.$fila['nivel'].'\', \''.$fila['padre_id'].'\', \''.($fila['orden'] + 1).'\', \''.$fila['id'].'\'); obtenerVista_EditarCrearMenu(\'Menu\', \'getVistaNuevoEditar\', \'capaEditarCrear\', \'\', \''.$fila['nivel'].'\', \''.$fila['padre_id'].'\', \''.($fila['orden'] + 1).'\')">Añadir por debajo</button></td>';
+        
+        if($fila['es_dropdown'] == 1){
+            $html.='<td><button class="btn btn-outline-primary" onclick="añadirFila('.$fila['id'].', '.$fila['id'].'); obtenerVista_EditarCrearMenuFila(\'Menu\', \'getVistaNuevoEditarFila\', \'newTr'.$fila['id'].'\', \'\', \''.($fila['nivel'] + 1).'\', \''.$fila['id'].'\', \'1\', \''.$fila['id'].'\'); obtenerVista_EditarCrearMenu(\'Menu\', \'getVistaNuevoEditar\', \'capaEditarCrear\', \'\', \''.($fila['nivel'] + 1).'\', \''.$fila['id'].'\', \'1\')">Añadir hijo</button></td>';
+        } else {
+            $html.='<td></td>';
+        }
+
+        $html.='<td><button class="btn btn-outline-primary" onclick="añadirFila('.$fila['id'].', '.$fila['id'].'); obtenerVista_EditarCrearMenuFila(\'Menu\', \'getVistaNuevoEditarFila\', \'newTr'.$fila['id'].'\', \''.$fila['id'].'\', \'\', \'\', \'\', \''.$fila['id'].'\'); obtenerVista_EditarCrearMenu(\'Menu\', \'getVistaNuevoEditar\', \'capaEditarCrear\', \''.$fila['id'].'\', \'\', \'\', \'\')">Editar</button></td>';
+    }
+        $html.='</tr>';
 
     $V_Menu_PermisosOpcionfila = new V_Menu_PermisosOpcionfila();
         
