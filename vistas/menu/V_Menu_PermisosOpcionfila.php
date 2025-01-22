@@ -1,6 +1,6 @@
 <?php
 class V_Menu_PermisosOpcionfila{
-    static public function getPermisosOpcionMenuFila($id, $permisos, $usuario, $rol){
+    static public function getPermisosOpcionMenuFila($id, $permisosGenerales, $permisosOpcionMenu, $usuario, $rol){
         // console.log("llego " + id + " " + originalTrId);
         // $newTr.innerHTML = ``;
 
@@ -18,21 +18,28 @@ class V_Menu_PermisosOpcionfila{
         }
 
         $html .= '<td colspan="4">';
+        if($usuario == 0 && $rol == 0){
+            if(empty($permisosOpcionMenu)){
+                $html.='No existen permisos';
+            } else {
+                foreach ($permisosOpcionMenu as $permiso) {
+                    $html.="
+                        <p>Id: ".$permiso['id'].", Permiso: ".$permiso['permiso'].", Menu: ".$permiso['id_Menu'].", Código: ".$permiso['codigo_Permiso']."</p>
+                    ";
 
-        if(empty($permisos)){
-            $html.='No existen permisos';
+                    if($usuario == 0 && $rol == 0){
+                        $html.="<button onclick=".'"abrirEdicionPermisoOpcionMenuFila('.$id.' , '."'".$permiso['permiso']."'".' , '."'".$permiso['codigo_Permiso']."'".' , '.$permiso['id'].')"'.">Editar</button>
+                        <button type=".'"button"'." onclick=".'"guardarPermisoOpcionMenuFila('.$id.', '."'eliminar'".', '.$permiso['id'].')"'.">Eliminar</button>";
+                    }
+
+                    $html.="<br>";
+                }
+            }
         } else {
-            foreach ($permisos as $permiso) {
+            foreach ($permisosGenerales as $permiso){
                 $html.="
                     <p>Id: ".$permiso['id'].", Permiso: ".$permiso['permiso'].", Menu: ".$permiso['id_Menu'].", Código: ".$permiso['codigo_Permiso']."</p>
                 ";
-
-                if($usuario == 0 && $rol == 0){
-                    $html.="<button onclick=".'"abrirEdicionPermisoOpcionMenuFila('.$id.' , '."'".$permiso['permiso']."'".' , '."'".$permiso['codigo_Permiso']."'".' , '.$permiso['id'].')"'.">Editar</button>
-                    <button type=".'"button"'." onclick=".'"guardarPermisoOpcionMenuFila('.$id.', '."'eliminar'".', '.$permiso['id'].')"'.">Eliminar</button>";
-                }
-
-                $html.="<br>";
             }
         }
         $html .= '</td>';

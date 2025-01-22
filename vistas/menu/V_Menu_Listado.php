@@ -6,6 +6,7 @@ $rol='';
 $permisos='';
 $opcionesMenu=array();
 extract($datos);
+$permisosGenerales=$permisos;
 echo 'Usuario: '.$usuario.' Rol: '.$rol;
 // echo '<pre>';
 // print_r($permisos);
@@ -89,12 +90,12 @@ $html.='<thead>
         // echo "entro id:".$fila['id']." ";
 
         $V_Menu_PermisosOpcionfila = new V_Menu_PermisosOpcionfila();
-        $html.= $V_Menu_PermisosOpcionfila->getPermisosOpcionMenuFila($fila['id'], $fila['permisosOpcionMenu'], $usuario, $rol);
+        $html.= $V_Menu_PermisosOpcionfila->getPermisosOpcionMenuFila($fila['id'], $permisosGenerales, $fila['permisosOpcionMenu'], $usuario, $rol);
         // $html.='<tr><td>Fila 1</td></tr>';
         
         // $html.='<tr id="trPermisos"'.$fila['id'].'><td></td></tr>';
     } else {
-        $html.= $V_Menu_PermisosOpcionfila->getPermisosOpcionMenuFila($fila['id'], Array(), $usuario, $rol);
+        $html.= $V_Menu_PermisosOpcionfila->getPermisosOpcionMenuFila($fila['id'], $permisosGenerales, Array(), $usuario, $rol);
     }
 }
 
