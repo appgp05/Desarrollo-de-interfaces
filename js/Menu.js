@@ -445,7 +445,7 @@ function actualizarUsuarioORolPorPermiso(usuarioORol, usuarioORolId, permiso){
     console.log("Acción: " + usuarioORol + ", Permiso: " + permiso);
 
     let opciones = { method: "GET", };
-    let parametros = "controlador=Menu&metodo=actualizarUsuarioORolPorPermiso&usuario="+usuarioORolId+"&permiso="+permiso;
+    let parametros = "controlador=Menu&metodo=actualizarUsuarioORolPorPermiso&usuarioORol="+usuarioORol+"&usuarioORolId="+usuarioORolId+"&permiso="+permiso;
 
     fetch("C_Frontal.php?" + parametros, opciones)
         .then(res=>{

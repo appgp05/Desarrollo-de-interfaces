@@ -164,8 +164,8 @@
         //     $V_Menu_PermisosOpcionfila = new V_Menu_PermisosOpcionfila()
         // }
 
-        public function actualizarUsuarioORolPorPermiso($datos){
-            $this->modelo->actualizarUsuarioConPermiso($datos['usuario'], $datos['permiso']);
+        public function actualizarUsuarioORolPorPermiso($datos=array()){
+            $this->modelo->actualizarUsuarioConPermiso($datos);
         }
     }
 ?>
