@@ -27,11 +27,14 @@ class V_Menu_PermisosOpcionfila{
         }
 
         $html .= '<td colspan="4">';
-        if($usuario == 0 && $rol == 0){
+        // if($usuario == 0 && $rol == 0){
             if(empty($permisosOpcionMenu)){
                 $html.='No existen permisos';
             } else {
                 foreach ($permisosOpcionMenu as $permiso) {
+                    $html.="<input type=".'"'."checkbox".'"'." onchange=".'"'."actualizarUsuarioORolPorPermiso("."'".$usuarioORol."'".", ".$usuarioORolId.", ".$permiso['id'].")".'"'.">";
+                
+                    
                     $html.="
                         <p>Id: ".$permiso['id'].", Permiso: ".$permiso['permiso'].", Menu: ".$permiso['id_Menu'].", Código: ".$permiso['codigo_Permiso']."</p>
                     ";
@@ -44,18 +47,18 @@ class V_Menu_PermisosOpcionfila{
                     $html.="<br>";
                 }
             }
-        } else {
-            foreach ($permisosGenerales as $permiso){
-                if(in_array($permiso, $permisosOpcionMenu)){
-                    $html.="<input type=".'"'."checkbox".'"'." checked onchange=".'"'."actualizarUsuarioORolPorPermiso("."'".$usuarioORol."'".", ".$usuarioORolId.", ".$permiso['id'].")".'"'.">";
-                } else {
-                    $html.="<input type=".'"'."checkbox".'"'." onchange=".'"'."actualizarUsuarioORolPorPermiso("."'".$usuarioORol."'".", ".$usuarioORolId.", ".$permiso['id'].")".'"'.">";
-                }
-                $html.="
-                    <p>Id: ".$permiso['id'].", Permiso: ".$permiso['permiso'].", Menu: ".$permiso['id_Menu'].", Código: ".$permiso['codigo_Permiso']."</p>
-                ";
-            }
-        }
+        // } else {
+        //     foreach ($permisosGenerales as $permiso){
+        //         if(in_array($permiso, $permisosOpcionMenu)){
+        //             $html.="<input type=".'"'."checkbox".'"'." checked onchange=".'"'."actualizarUsuarioORolPorPermiso("."'".$usuarioORol."'".", ".$usuarioORolId.", ".$permiso['id'].")".'"'.">";
+        //         } else {
+        //             $html.="<input type=".'"'."checkbox".'"'." onchange=".'"'."actualizarUsuarioORolPorPermiso("."'".$usuarioORol."'".", ".$usuarioORolId.", ".$permiso['id'].")".'"'.">";
+        //         }
+        //         $html.="
+        //             <p>Id: ".$permiso['id'].", Permiso: ".$permiso['permiso'].", Menu: ".$permiso['id_Menu'].", Código: ".$permiso['codigo_Permiso']."</p>
+        //         ";
+        //     }
+        // }
         $html .= '</td>';
         $html .= '</tr>';
 
