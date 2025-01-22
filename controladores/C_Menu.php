@@ -26,7 +26,19 @@
             $opcionesMenu=$this->modelo->buscarOpcionesMenu($filtros);
             $permisos=$this->modelo->getPermisos();
             // añadirPermisosOpcionesMenuFila();
-            Vista::render('vistas/menu/V_Menu_Listado.php',array('opcionesMenu'=>$opcionesMenu, 'usuario'=>$filtros['ftextoUsuario'], 'rol'=>$filtros['ftextoRol'], 'permisos'=>$permisos));
+            
+            if(isset($filtros['ftextoUsuario'])){
+                $usuario=$filtros['ftextoUsuario'];
+            } else {
+                $usuario=0;
+            }
+            if(isset($filtros['ftextoRol'])){
+                $rol=$filtros['ftextoRol'];
+            } else {
+                $rol=0;
+            }
+
+            Vista::render('vistas/menu/V_Menu_Listado.php',array('opcionesMenu'=>$opcionesMenu, 'usuario'=>$usuario, 'rol'=>$rol, 'permisos'=>$permisos));
         }
 
         public function getVistaNuevoEditar($datos=array()){

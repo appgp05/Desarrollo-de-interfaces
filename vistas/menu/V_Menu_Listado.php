@@ -66,7 +66,7 @@ $html.='<thead>
                 <td class="metodoMenu">'.$fila['metodoMenu'].'</td>
                 <td class="destinoMenu">'.$fila['destinoMenu'].'</td>';
 
-    if($rol == 0 && $usuario == 0){
+    if($usuario == 0 && $rol == 0){
         $html.='<td><button class="btn btn-outline-primary" onclick="añadirFila('.$fila['id'].', '.$fila['id'].'); obtenerVista_EditarCrearMenuFila(\'Menu\', \'getVistaNuevoEditarFila\', \'newTr'.$fila['id'].'\', \'\', \''.$fila['nivel'].'\', \''.$fila['padre_id'].'\', \''.($fila['orden'] + 1).'\', \''.$fila['id'].'\'); obtenerVista_EditarCrearMenu(\'Menu\', \'getVistaNuevoEditar\', \'capaEditarCrear\', \'\', \''.$fila['nivel'].'\', \''.$fila['padre_id'].'\', \''.($fila['orden'] + 1).'\')">Añadir por debajo</button></td>';
         
         if($fila['es_dropdown'] == 1){
@@ -89,12 +89,12 @@ $html.='<thead>
         // echo "entro id:".$fila['id']." ";
 
         $V_Menu_PermisosOpcionfila = new V_Menu_PermisosOpcionfila();
-        $html.= $V_Menu_PermisosOpcionfila->getPermisosOpcionMenuFila($fila['id'], $fila['permisosOpcionMenu']);
+        $html.= $V_Menu_PermisosOpcionfila->getPermisosOpcionMenuFila($fila['id'], $fila['permisosOpcionMenu'], $usuario, $rol);
         // $html.='<tr><td>Fila 1</td></tr>';
         
         // $html.='<tr id="trPermisos"'.$fila['id'].'><td></td></tr>';
     } else {
-        $html.= $V_Menu_PermisosOpcionfila->getPermisosOpcionMenuFila($fila['id'], Array());
+        $html.= $V_Menu_PermisosOpcionfila->getPermisosOpcionMenuFila($fila['id'], Array(), $usuario, $rol);
     }
 }
 
