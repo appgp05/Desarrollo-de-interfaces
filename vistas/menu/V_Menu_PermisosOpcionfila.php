@@ -4,13 +4,18 @@ class V_Menu_PermisosOpcionfila{
         // console.log("llego " + id + " " + originalTrId);
         // $newTr.innerHTML = ``;
 
-        if($usuario != 0){
-            $usuarioORol = 'usuario';
-            $usuarioORolId = $usuario;
-        }
-        if($rol != 0){
-            $usuarioORol = 'rol';
-            $usuarioORolId = $rol;
+        if($usuario == 0 && $rol == 0){
+            $usuarioORol = '';
+            $usuarioORolId = 0;
+        } else {
+            if($usuario != 0){
+                $usuarioORol = 'usuario';
+                $usuarioORolId = $usuario;
+            }
+            if($rol != 0){
+                $usuarioORol = 'rol';
+                $usuarioORolId = $rol;
+            }
         }
 
         $html = "";
@@ -38,10 +43,12 @@ class V_Menu_PermisosOpcionfila{
                     // echo '<pre>';
                     // print_r($listaPermisosUsuarioORol);
                     // echo '</pre>';
-                    if(in_array($permiso['id'], array_column($listaPermisosUsuarioORol, 'id_Permiso'))){
-                        $html.="<input type=".'"'."checkbox".'"'." checked onchange=".'"'."actualizarUsuarioORolPorPermiso("."'".$usuarioORol."'".", ".$usuarioORolId.", ".$permiso['id'].")".'"'.">";
-                    } else {
-                        $html.="<input type=".'"'."checkbox".'"'." onchange=".'"'."actualizarUsuarioORolPorPermiso("."'".$usuarioORol."'".", ".$usuarioORolId.", ".$permiso['id'].")".'"'.">";
+                    if($usuario != 0 || $rol != 0){
+                        if(in_array($permiso['id'], array_column($listaPermisosUsuarioORol, 'id_Permiso'))){
+                            $html.="<input type=".'"'."checkbox".'"'." checked onchange=".'"'."actualizarUsuarioORolPorPermiso("."'".$usuarioORol."'".", ".$usuarioORolId.", ".$permiso['id'].")".'"'.">";
+                        } else {
+                            $html.="<input type=".'"'."checkbox".'"'." onchange=".'"'."actualizarUsuarioORolPorPermiso("."'".$usuarioORol."'".", ".$usuarioORolId.", ".$permiso['id'].")".'"'.">";
+                        }
                     }
                     
                     $html.="
