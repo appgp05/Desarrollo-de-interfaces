@@ -217,8 +217,16 @@ CREATE TABLE `permisos` (
   `codigo_Permiso` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
 );
-INSERT INTO `permisos` (`id`, `permiso`, `id_Menu`, `codigo_Permiso`) VALUES
-(1, 'accesoMenu', 6, 'ACS_M');
+INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
+('acceso', 1, 'ACS_M');
+INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
+('accesoo', 3, 'ACS_M');
+INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
+('accesooo', 4, 'ACS_M');
+INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
+('accesoooo', 5, 'ACS_M');
+INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
+('accesooooo', 6, 'ACS_M');
 
 DROP TABLE IF EXISTS permisosusuarios;
   CREATE TABLE `permisosusuarios` (

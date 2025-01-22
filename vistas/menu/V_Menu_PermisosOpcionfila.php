@@ -37,6 +37,11 @@ class V_Menu_PermisosOpcionfila{
             }
         } else {
             foreach ($permisosGenerales as $permiso){
+                if(in_array($permiso, $permisosOpcionMenu)){
+                    $html.="<input type=".'"'."checkbox".'"'." checked>";
+                } else {
+                    $html.="<input type=".'"'."checkbox".'"'.">";
+                }
                 $html.="
                     <p>Id: ".$permiso['id'].", Permiso: ".$permiso['permiso'].", Menu: ".$permiso['id_Menu'].", Código: ".$permiso['codigo_Permiso']."</p>
                 ";
