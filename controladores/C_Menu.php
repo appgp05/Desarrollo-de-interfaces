@@ -29,16 +29,18 @@
             
             if(isset($filtros['ftextoUsuario'])){
                 $usuario=$filtros['ftextoUsuario'];
+                $listaPermisosUsuarioORol=$this->modelo->buscarPermisosUsuario($usuario);
             } else {
                 $usuario=0;
             }
             if(isset($filtros['ftextoRol'])){
                 $rol=$filtros['ftextoRol'];
+                $listaPermisosUsuarioORol=$this->modelo->buscarPermisosRol($rol);
             } else {
                 $rol=0;
             }
 
-            Vista::render('vistas/menu/V_Menu_Listado.php',array('opcionesMenu'=>$opcionesMenu, 'usuario'=>$usuario, 'rol'=>$rol, 'permisos'=>$permisos));
+            Vista::render('vistas/menu/V_Menu_Listado.php',array('opcionesMenu'=>$opcionesMenu, 'usuario'=>$usuario, 'rol'=>$rol, 'permisos'=>$permisos, 'listaPermisosUsuarioORol'=>$listaPermisosUsuarioORol));
         }
 
         public function getVistaNuevoEditar($datos=array()){

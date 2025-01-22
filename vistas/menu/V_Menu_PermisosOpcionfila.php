@@ -1,6 +1,6 @@
 <?php
 class V_Menu_PermisosOpcionfila{
-    static public function getPermisosOpcionMenuFila($id, $permisosGenerales, $permisosOpcionMenu, $usuario, $rol){
+    static public function getPermisosOpcionMenuFila($id, $permisosGenerales, $permisosOpcionMenu, $listaPermisosUsuarioORol, $usuario, $rol){
         // console.log("llego " + id + " " + originalTrId);
         // $newTr.innerHTML = ``;
 
@@ -32,8 +32,17 @@ class V_Menu_PermisosOpcionfila{
                 $html.='No existen permisos';
             } else {
                 foreach ($permisosOpcionMenu as $permiso) {
-                    $html.="<input type=".'"'."checkbox".'"'." onchange=".'"'."actualizarUsuarioORolPorPermiso("."'".$usuarioORol."'".", ".$usuarioORolId.", ".$permiso['id'].")".'"'.">";
-                
+                    // echo '<pre>';
+                    // print_r($permiso);
+                    // echo '</pre>';
+                    // echo '<pre>';
+                    // print_r($listaPermisosUsuarioORol);
+                    // echo '</pre>';
+                    if(in_array($permiso['id'], array_column($listaPermisosUsuarioORol, 'id_Permiso'))){
+                        $html.="<input type=".'"'."checkbox".'"'." checked onchange=".'"'."actualizarUsuarioORolPorPermiso("."'".$usuarioORol."'".", ".$usuarioORolId.", ".$permiso['id'].")".'"'.">";
+                    } else {
+                        $html.="<input type=".'"'."checkbox".'"'." onchange=".'"'."actualizarUsuarioORolPorPermiso("."'".$usuarioORol."'".", ".$usuarioORolId.", ".$permiso['id'].")".'"'.">";
+                    }
                     
                     $html.="
                         <p>Id: ".$permiso['id'].", Permiso: ".$permiso['permiso'].", Menu: ".$permiso['id_Menu'].", Código: ".$permiso['codigo_Permiso']."</p>
