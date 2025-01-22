@@ -425,9 +425,18 @@ function mostrarPermisosOpcionesMenuFila(){
 }
 
 function controlarFiltrosMenu(filtro, valor){
+    console.log("llego", filtro, valor);
     if(filtro === 'usuario'){
-        if(valor != 0){
+        if(valor == 0){
+            document.getElementById('ftextoRol').disabled=false;
+        } else {
             document.getElementById('ftextoRol').disabled=true;
+        }
+    } else if(filtro === 'rol') {
+        if(valor == 0){
+            document.getElementById('ftextoUsuario').disabled=false;
+        } else {
+            document.getElementById('ftextoUsuario').disabled=true;
         }
     }
 }

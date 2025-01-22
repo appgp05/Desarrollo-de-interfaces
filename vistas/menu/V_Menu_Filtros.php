@@ -22,7 +22,7 @@
             <label for="">Usuario:</label>
             <select type="text" id="ftextoUsuario" name="ftextoUsuario"
                 class="form-control" placeholder="Usuario" value=""
-                onselect="controlarFiltrosMenu('usuario', value)">
+                onchange="controlarFiltrosMenu('usuario', value)">
                 <option value="0">-</option>
                 <?php
                     foreach($usuarios as $key => $usuario){
@@ -34,7 +34,8 @@
         <div class="form-group col-md-6 col-sm-12">
             <label for="">Rol:</label>
             <select type="text" id="ftextoRol" name="ftextoRol"
-                class="form-control" placeholder="Rol" value="">
+                class="form-control" placeholder="Rol" value=""
+                onchange="controlarFiltrosMenu('rol', value)">
                 <option value="0">-</option>
                 <?php
                     foreach($roles as $key => $rol){
