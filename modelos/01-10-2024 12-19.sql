@@ -231,13 +231,15 @@ INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
 DROP TABLE IF EXISTS permisosusuarios;
   CREATE TABLE `permisosusuarios` (
   `id_Usuario` int(11) NOT NULL,
-  `id_Permiso` int(11) NOT NULL
+  `id_Permiso` int(11) NOT NULL,
+  PRIMARY KEY (`id_Usuario`, `id_Permiso`)
 );
 
 DROP TABLE IF EXISTS permisosroles;
 CREATE TABLE `permisosroles` (
   `id_Rol` int(11) NOT NULL,
-  `id_Permiso` int(11) NOT NULL
+  `id_Permiso` int(11) NOT NULL,
+  PRIMARY KEY (`id_Rol`, `id_Permiso`)
 );
 
 DROP TABLE IF EXISTS roles;

@@ -440,3 +440,18 @@ function controlarFiltrosMenu(filtro, valor){
         }
     }
 }
+
+function actualizarUsuarioORolPorPermiso(usuarioORol, usuarioORolId, permiso){
+    console.log("Acción: " + usuarioORol + ", Permiso: " + permiso);
+
+    let opciones = { method: "GET", };
+    let parametros = "controlador=Menu&metodo=actualizarUsuarioORolPorPermiso&usuario="+usuarioORolId+"&permiso="+permiso;
+
+    fetch("C_Frontal.php?" + parametros, opciones)
+        .then(res=>{
+            if(res.ok){
+                return res.json();
+            }
+            throw new Error(res.status);
+        })
+}

@@ -163,5 +163,9 @@
         //     require_once 'vistas\menu\V_Menu_PermisosOpcionfila.php';
         //     $V_Menu_PermisosOpcionfila = new V_Menu_PermisosOpcionfila()
         // }
+
+        public function actualizarUsuarioORolPorPermiso($datos){
+            $this->modelo->actualizarUsuarioConPermiso($datos['usuario'], $datos['permiso']);
+        }
     }
 ?>

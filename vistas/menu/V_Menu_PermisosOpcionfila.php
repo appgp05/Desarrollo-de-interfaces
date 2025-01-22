@@ -4,6 +4,15 @@ class V_Menu_PermisosOpcionfila{
         // console.log("llego " + id + " " + originalTrId);
         // $newTr.innerHTML = ``;
 
+        if($usuario != 0){
+            $usuarioORol = 'usuario';
+            $usuarioORolId = $usuario;
+        }
+        if($rol != 0){
+            $usuarioORol = 'rol';
+            $usuarioORolId = $rol;
+        }
+
         $html = "";
         $html .= '<tr id="permissionTr'.$id.'">';
         if($usuario == 0 && $rol == 0){
@@ -38,9 +47,9 @@ class V_Menu_PermisosOpcionfila{
         } else {
             foreach ($permisosGenerales as $permiso){
                 if(in_array($permiso, $permisosOpcionMenu)){
-                    $html.="<input type=".'"'."checkbox".'"'." checked>";
+                    $html.="<input type=".'"'."checkbox".'"'." checked onchange=".'"'."actualizarUsuarioORolPorPermiso("."'".$usuarioORol."'".", ".$usuarioORolId.", ".$permiso['id'].")".'"'.">";
                 } else {
-                    $html.="<input type=".'"'."checkbox".'"'.">";
+                    $html.="<input type=".'"'."checkbox".'"'." onchange=".'"'."actualizarUsuarioORolPorPermiso("."'".$usuarioORol."'".", ".$usuarioORolId.", ".$permiso['id'].")".'"'.">";
                 }
                 $html.="
                     <p>Id: ".$permiso['id'].", Permiso: ".$permiso['permiso'].", Menu: ".$permiso['id_Menu'].", Código: ".$permiso['codigo_Permiso']."</p>

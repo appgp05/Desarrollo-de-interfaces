@@ -203,5 +203,22 @@ class M_Menu extends Modelo{
         $SQL="SELECT * FROM usuarios";
         return $this->DAO->consultar($SQL);
     }
+
+    public function actualizarUsuarioConPermiso($usuario, $permiso){
+        // $SQL="UPDATE `usuarios` SET `activo` = CASE WHEN `activo` = 'N' THEN 'S' ELSE 'N' END WHERE `id_Usuario` = '$id_Usuario';";
+        // $SQL="CASE NOT EXISTS INSERT INTO permisosusuarios VALUES ( 1, 3); ELSE DELETE FROM permisosusuarios WHERE id_Usuario = 1 AND id_Permiso = 3";
+        // $SQL="INSERT INTO permisosusuarios VALUES ( ".$usuario.", ".$permiso.")";
+
+        // $SQL="IF NOT EXISTS (SELECT 1 FROM permisosusuarios WHERE id_Usuario = ".$usuario." AND id_Permiso = ".$permiso.") THEN
+        //         INSERT INTO permisosusuarios (id_Usuario, id_Permiso) VALUES (".$usuario.", ".$permiso.");
+        //     ELSE
+        //         DELETE FROM permisosusuarios WHERE id_Usuario = ".$usuario." AND id_Permiso = ".$permiso.";
+        //     END IF;";
+
+        $SQL="INSERT INTO permisosusuarios (id_Usuario, id_Permiso) VALUES ($usuario, $permiso) ON DUPLICATE KEY UPDATE id_Usuario = 0, id_Permiso = 0;
+DELETE FROM permisosusuarios WHERE id_Usuario = $usuario AND id_Permiso = $permiso;";
+        
+        $this->DAO->actualizar($SQL);
+    }
 }
 ?>
