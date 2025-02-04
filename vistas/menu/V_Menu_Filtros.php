@@ -67,7 +67,7 @@
             </div>
         </form>
         
-        <div>
+        <!-- <div>
             <button type="button" class="btn btn-outline-primary"
             onclick="guardarRol(0, 'editar')">Editar</button>
         </div>
@@ -75,7 +75,7 @@
         <div>
             <button type="button" class="btn btn-outline-primary"
             onclick="guardarRol(0, 'eliminar')">Eliminar</button>
-        </div>
+        </div> -->
 
         <div>
             <button type="button" class="btn btn-outline-primary"

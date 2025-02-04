@@ -425,31 +425,31 @@ function mostrarPermisosOpcionesMenuFila(){
 }
 
 function controlarFiltrosMenu(filtro, valor){
-    const campoGestionRoles = document.getElementById("campoGestionRoles");
-    campoGestionRoles.innerHTML = `
-        <form id="formularioGestionarRol" name="formularioGestionarRol">
-            <div class="form-group col-md-4 col-sm-4">
-                <!-- <label for="">Nombre del rol:</label> -->
-                <input type="text" id="rol" name="rol"
-                class="form-control" placeholder="Texto a buscar" value="">
-            </div>
-        </form>
+    // const campoGestionRoles = document.getElementById("campoGestionRoles");
+    // campoGestionRoles.innerHTML = `
+    //     <form id="formularioGestionarRol" name="formularioGestionarRol">
+    //         <div class="form-group col-md-4 col-sm-4">
+    //             <!-- <label for="">Nombre del rol:</label> -->
+    //             <input type="text" id="rol" name="rol"
+    //             class="form-control" placeholder="Texto a buscar" value="">
+    //         </div>
+    //     </form>
         
-        <div>
-            <button type="button" class="btn btn-outline-primary"
-            onclick="guardarRol(${valor}, 'editar')">Editar</button>
-        </div>
+    //     <div>
+    //         <button type="button" class="btn btn-outline-primary"
+    //         onclick="guardarRol(${valor}, 'editar')">Editar</button>
+    //     </div>
 
-        <div>
-            <button type="button" class="btn btn-outline-primary"
-            onclick="guardarRol(${valor}, 'eliminar')">Eliminar</button>
-        </div>
+    //     <div>
+    //         <button type="button" class="btn btn-outline-primary"
+    //         onclick="guardarRol(${valor}, 'eliminar')">Eliminar</button>
+    //     </div>
 
-        <div>
-            <button type="button" class="btn btn-outline-primary"
-            onclick="guardarRol(${valor}, 'crear')">Crear</button>
-        </div>
-    `;
+    //     <div>
+    //         <button type="button" class="btn btn-outline-primary"
+    //         onclick="guardarRol(${valor}, 'crear')">Crear</button>
+    //     </div>
+    // `;
 
     console.log("llego", filtro, valor);
     if(filtro === 'usuario'){
@@ -460,8 +460,44 @@ function controlarFiltrosMenu(filtro, valor){
         }
     } else if(filtro === 'rol') {
         if(valor == 0){
+            const campoGestionRoles = document.getElementById("campoGestionRoles");
+            campoGestionRoles.innerHTML = `
+            <form id="formularioGestionarRol" name="formularioGestionarRol">
+                <div class="form-group col-md-4 col-sm-4">
+                    <!-- <label for="">Nombre del rol:</label> -->
+                    <input type="text" id="rol" name="rol"
+                    class="form-control" placeholder="Texto a buscar" value="">
+                </div>
+            </form>
+
+            <div>
+                <button type="button" class="btn btn-outline-primary"
+                onclick="guardarRol(${valor}, 'crear')">Crear</button>
+            </div>
+            `;
+
             document.getElementById('ftextoUsuario').disabled=false;
         } else {
+            const campoGestionRoles = document.getElementById("campoGestionRoles");
+            campoGestionRoles.innerHTML = `
+            <form id="formularioGestionarRol" name="formularioGestionarRol">
+                <div class="form-group col-md-4 col-sm-4">
+                    <!-- <label for="">Nombre del rol:</label> -->
+                    <input type="text" id="rol" name="rol"
+                    class="form-control" placeholder="Texto a buscar" value="">
+                </div>
+            </form>
+            
+            <div>
+                <button type="button" class="btn btn-outline-primary"
+                onclick="guardarRol(${valor}, 'editar')">Editar</button>
+            </div>
+
+            <div>
+                <button type="button" class="btn btn-outline-primary"
+                onclick="guardarRol(${valor}, 'eliminar')">Eliminar</button>
+            </div>
+            `;
             document.getElementById('ftextoUsuario').disabled=true;
         }
     }
@@ -503,6 +539,7 @@ function guardarRol(id, accion){
                       option.textContent = role.rol
                       roleSelect.appendChild(option)
                     })
+                    controlarFiltrosMenu('rol', 0);
                   })
                   .catch((error) => {
                     console.error("Error updating role select:", error)
