@@ -498,6 +498,11 @@ function controlarFiltrosMenu(filtro, valor){
                 onclick="guardarRol(${valor}, 'eliminar')">Eliminar</button>
             </div>
             `;
+
+            // var select = document.getElementById('ftextoRol');
+            // var selectedText = select.options[select.selectedIndex].text;
+
+            document.getElementById('rol').value = document.getElementById('ftextoRol').options[document.getElementById('ftextoRol').selectedIndex].text;
             document.getElementById('ftextoUsuario').disabled=true;
         }
     }
