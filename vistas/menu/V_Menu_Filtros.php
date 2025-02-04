@@ -86,7 +86,7 @@
     <div class="row">
         <div class="col-lg-12">
             <button type="button" class="btn btn-outline-primary"
-            onclick="guardarRol('Menu', 'getVistaListadoOpcionesMenu', 'formularioGestionarRol', 'capaResultadoBusqueda', '')">Buscar</button>
+            onclick="buscar('Menu', 'getVistaListadoOpcionesMenu', 'formularioBuscar', 'capaResultadoBusqueda', '')">Buscar</button>
             <!-- <button type="button" class="btn btn-outline-secondary"
             onclick="obtenerVista_EditarCrear('Usuarios', 'getVistaNuevoEditar', 'capaEditarCrear', '')">Nuevo</button> -->
         </div>
