@@ -367,6 +367,163 @@ function mostrarPermisosOpcionesMenuFila(){
     });
 }
 
+<<<<<<< Updated upstream
 function actualizarPermisosOpcionMenuFila(){
     
 }
+=======
+function controlarFiltrosMenu(filtro, valor){
+    // const campoGestionRoles = document.getElementById("campoGestionRoles");
+    // campoGestionRoles.innerHTML = `
+    //     <form id="formularioGestionarRol" name="formularioGestionarRol">
+    //         <div class="form-group col-md-4 col-sm-4">
+    //             <!-- <label for="">Nombre del rol:</label> -->
+    //             <input type="text" id="rol" name="rol"
+    //             class="form-control" placeholder="Texto a buscar" value="">
+    //         </div>
+    //     </form>
+        
+    //     <div>
+    //         <button type="button" class="btn btn-outline-primary"
+    //         onclick="guardarRol(${valor}, 'editar')">Editar</button>
+    //     </div>
+
+    //     <div>
+    //         <button type="button" class="btn btn-outline-primary"
+    //         onclick="guardarRol(${valor}, 'eliminar')">Eliminar</button>
+    //     </div>
+
+    //     <div>
+    //         <button type="button" class="btn btn-outline-primary"
+    //         onclick="guardarRol(${valor}, 'crear')">Crear</button>
+    //     </div>
+    // `;
+
+    console.log("llego", filtro, valor);
+    if(filtro === 'usuario'){
+        if(valor == 0){
+            document.getElementById('ftextoRol').disabled=false;
+        } else {
+            document.getElementById('ftextoRol').disabled=true;
+        }
+    } else if(filtro === 'rol') {
+        if(valor == 0){
+            const campoGestionRoles = document.getElementById("campoGestionRoles");
+            campoGestionRoles.innerHTML = `
+            <form id="formularioGestionarRol" name="formularioGestionarRol">
+                <div class="form-group col-md-4 col-sm-4">
+                    <!-- <label for="">Nombre del rol:</label> -->
+                    <input type="text" id="rol" name="rol"
+                    class="form-control" placeholder="Texto a buscar" value="">
+                </div>
+            </form>
+
+            <div>
+                <button type="button" class="btn btn-outline-primary"
+                onclick="guardarRol(${valor}, 'crear')">Crear</button>
+            </div>
+            `;
+
+            document.getElementById('ftextoUsuario').disabled=false;
+        } else {
+            const campoGestionRoles = document.getElementById("campoGestionRoles");
+            campoGestionRoles.innerHTML = `
+            <form id="formularioGestionarRol" name="formularioGestionarRol">
+                <div class="form-group col-md-4 col-sm-4">
+                    <!-- <label for="">Nombre del rol:</label> -->
+                    <input type="text" id="rol" name="rol"
+                    class="form-control" placeholder="Texto a buscar" value="">
+                </div>
+            </form>
+            
+            <div>
+                <button type="button" class="btn btn-outline-primary"
+                onclick="guardarRol(${valor}, 'editar')">Editar</button>
+            </div>
+
+            <div>
+                <button type="button" class="btn btn-outline-primary"
+                onclick="guardarRol(${valor}, 'eliminar')">Eliminar</button>
+            </div>
+            `;
+
+
+
+            // var select = document.getElementById('ftextoRol');
+            // var selectedText = select.options[select.selectedIndex].text;
+
+            document.getElementById('rol').value = document.getElementById('ftextoRol').options[document.getElementById('ftextoRol').selectedIndex].text;
+            document.getElementById('ftextoUsuario').disabled=true;
+        }
+
+        fetch("C_Frontal.php?controlador=Menu&metodo=getRoles?id="+document.getElementById("ftextoUsuario").value)
+            .then((response) => response.json())
+            .then((roles) => {
+            Array.from(document.getElementById("ftextoRol").options).forEach((option) => {
+                if (roles.includes(option.text)) {
+                    option.classList.add("assigned-role")
+                } else {
+                    option.classList.remove("assigned-role")
+                }
+            });
+            })
+            .catch((error) => {
+            })
+    }
+}
+
+function actualizarUsuarioORolPorPermiso(usuarioORol, usuarioORolId, permiso){
+    console.log("Acción: " + usuarioORol + ", Permiso: " + permiso);
+
+    let opciones = { method: "GET", };
+    let parametros = "controlador=Menu&metodo=actualizarUsuarioORolPorPermiso&usuarioORol="+usuarioORol+"&usuarioORolId="+usuarioORolId+"&permiso="+permiso;
+
+    fetch("C_Frontal.php?" + parametros, opciones)
+        .then(res=>{
+            if(res.ok){
+                return res.json();
+            }
+            throw new Error(res.status);
+        })
+}
+
+function guardarRol(id, accion){
+    let opciones = { method: "GET", };
+    let parametros = "controlador=Menu&metodo=guardarRol&id="+id+"&accion="+accion;
+    parametros+='&'+new URLSearchParams(
+                    new FormData(document.getElementById('formularioGestionarRol'))).toString();
+                    console.log("FormData: " + new URLSearchParams(
+                        new FormData(document.getElementById('formularioGestionarRol'))).toString());
+    console.log("Parametros: " + parametros);
+    fetch("C_Frontal.php?" + parametros, opciones)
+        .then(res=>{
+                fetch("C_Frontal.php?controlador=Menu&metodo=getRoles")
+                  .then((response) => response.json())
+                  .then((roles) => {
+                    const roleSelect = document.getElementById("ftextoRol")
+                    roleSelect.innerHTML = '<option value="0">-</option>'
+                    roles.forEach((role) => {
+                      const option = document.createElement("option")
+                      option.value = role.id
+                      option.textContent = role.rol
+                      roleSelect.appendChild(option)
+                    })
+
+                    controlarFiltrosMenu('rol', 0);
+                  })
+                  .catch((error) => {
+                    console.error("Error updating role select:", error)
+                  })
+
+
+            if(res.ok){
+                return res.json();
+            }
+            throw new Error(res.status);
+        })
+        .catch(err=>{
+            console.log("Error al guardar", err.message);
+        })
+}
+
+>>>>>>> Stashed changes

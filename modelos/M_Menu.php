@@ -186,5 +186,106 @@ class M_Menu extends Modelo{
         $SQL="DELETE FROM `permisos` WHERE id = ".$id;
         return $this->DAO->borrar($SQL);
     }
+<<<<<<< Updated upstream
+=======
+
+    public function buscarRoles(){
+        $SQL="SELECT * FROM roles";
+        return $this->DAO->consultar($SQL);
+    }
+
+    public function buscarUsuarios(){
+        $SQL="SELECT * FROM usuarios";
+        return $this->DAO->consultar($SQL);
+    }
+
+    public function buscarPermisosUsuario($id){
+        $SQL="SELECT * FROM permisosusuarios WHERE id_Usuario = ".$id;
+        // echo $SQL;
+        return $this->DAO->consultar($SQL);
+    }
+
+    public function buscarRolesUsuario($id){
+        $SQL="SELECT * FROM rolesusuarios WHERE id_Usuario = ".$id;
+        // echo $SQL;
+        return $this->DAO->consultar($SQL);
+    }
+
+    public function buscarPermisosRol($id){
+        $SQL="SELECT * FROM permisosroles WHERE id_Rol = ".$id;
+        return $this->DAO->consultar($SQL);
+    }
+
+    public function actualizarUsuarioConPermiso($datos=Array()){
+        // $SQL="UPDATE `usuarios` SET `activo` = CASE WHEN `activo` = 'N' THEN 'S' ELSE 'N' END WHERE `id_Usuario` = '$id_Usuario';";
+        // $SQL="CASE NOT EXISTS INSERT INTO permisosusuarios VALUES ( 1, 3); ELSE DELETE FROM permisosusuarios WHERE id_Usuario = 1 AND id_Permiso = 3";
+        // $SQL="INSERT INTO permisosusuarios VALUES ( ".$usuario.", ".$permiso.")";
+
+        // $SQL="IF NOT EXISTS (SELECT 1 FROM permisosusuarios WHERE id_Usuario = ".$usuario." AND id_Permiso = ".$permiso.") THEN
+        //         INSERT INTO permisosusuarios (id_Usuario, id_Permiso) VALUES (".$usuario.", ".$permiso.");
+        //     ELSE
+        //         DELETE FROM permisosusuarios WHERE id_Usuario = ".$usuario." AND id_Permiso = ".$permiso.";
+        //     END IF;";
+
+        if($datos['usuarioORol'] === 'usuario'){
+            $SQL="SELECT * FROM permisosusuarios WHERE id_Usuario = ".$datos['usuarioORolId']." AND id_Permiso = ".$datos['permiso'];
+            $id=$this->DAO->consultar($SQL);
+            // print_r($id);
+            if(isset($id) && $id != []){
+                $SQL="DELETE FROM permisosusuarios WHERE id_Usuario = ".$datos['usuarioORolId']." AND id_Permiso = ".$datos['permiso'];
+                $this->DAO->borrar($SQL);
+            } else {
+                $SQL="INSERT INTO permisosusuarios (id_Usuario, id_Permiso) VALUES (".$datos['usuarioORolId'].", ".$datos['permiso'].")";
+                $this->DAO->insertar($SQL);
+            }
+        } else if($datos['usuarioORol'] === 'rol'){
+            $SQL="SELECT * FROM permisosroles WHERE id_Rol = ".$datos['usuarioORolId']." AND id_Permiso = ".$datos['permiso'];
+            $id=$this->DAO->consultar($SQL);
+            // print_r($id);
+            if(isset($id) && $id != []){
+                $SQL="DELETE FROM permisosroles WHERE id_Rol = ".$datos['usuarioORolId']." AND id_Permiso = ".$datos['permiso'];
+                $this->DAO->borrar($SQL);
+            } else {
+                $SQL="INSERT INTO permisosroles (id_Rol, id_Permiso) VALUES (".$datos['usuarioORolId'].", ".$datos['permiso'].")";
+                $this->DAO->insertar($SQL);
+            }
+        }
+
+        // $SQL="INSERT INTO permisosusuarios (id_Usuario, id_Permiso) VALUES ($usuario, $permiso) ON DUPLICATE KEY UPDATE id_Usuario = 0, id_Permiso = 0;
+        // DELETE FROM permisosusuarios WHERE id_Usuario = 0 AND id_Permiso = 0;";
+        
+        // $this->DAO->insertar($SQL);
+    }
+
+    public function obtenerRoles(){
+        $SQL="SELECT * FROM roles;";
+        return $this->DAO->consultar($SQL);
+    }
+
+    public function crearRol($datos){
+        $rol='';
+        extract($datos);
+
+        $SQL="INSERT INTO `roles` (`rol`) VALUES ('$rol');";
+        $this->DAO->insertar($SQL);
+    }
+
+    public function editarRol($datos){
+        $id='';
+        $rol='';
+        extract($datos);
+        // echo $SQL;
+        $SQL="UPDATE roles SET rol = '$rol' WHERE id = $id";
+        $this->DAO->actualizar($SQL);
+    }
+
+    public function eliminarRol($datos){
+        $id='';
+        extract($datos);
+
+        $SQL="DELETE FROM roles WHERE id = $id";
+        $this->DAO->borrar($SQL);
+    }
+>>>>>>> Stashed changes
 }
 ?>

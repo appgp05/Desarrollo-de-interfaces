@@ -242,6 +242,8 @@ CREATE TABLE `rolesusuarios` (
   `id_Usuario`,
   `id_rol`
 );
+INSERT INTO `rolesusuarios` VALUES
+(1, 1);
 
 --
 -- Índices para tablas volcadas
