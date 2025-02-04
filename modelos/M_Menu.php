@@ -199,6 +199,11 @@ class M_Menu extends Modelo{
         return $this->DAO->consultar($SQL);
     }
 
+    public function buscarRolesUsuario($id){
+        $SQL="SELECT * FROM roles WHERE id IN (SELECT id_Rol FROM rolesusuarios WHERE id_Usuario = ".$id.")";
+        return $this->DAO->consultar($SQL);
+    }
+
     public function buscarUsuarios(){
         $SQL="SELECT * FROM usuarios";
         return $this->DAO->consultar($SQL);

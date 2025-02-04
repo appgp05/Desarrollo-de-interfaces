@@ -1,6 +1,6 @@
 <?php
 class V_Menu_PermisosOpcionfila{
-    static public function getPermisosOpcionMenuFila($id, $permisosGenerales, $permisosOpcionMenu, $listaPermisosUsuarioORol, $usuario, $rol){
+    static public function getPermisosOpcionMenuFila($id, $permisosGenerales, $permisosOpcionMenu, $listaPermisosUsuarioORol, $listaPermisosUsuarioPorRol, $usuario, $rol){
         // console.log("llego " + id + " " + originalTrId);
         // $newTr.innerHTML = ``;
 
@@ -59,6 +59,33 @@ class V_Menu_PermisosOpcionfila{
                         $html.="<button onclick=".'"abrirEdicionPermisoOpcionMenuFila('.$id.' , '."'".$permiso['permiso']."'".' , '."'".$permiso['codigo_Permiso']."'".' , '.$permiso['id'].')"'.">Editar</button>
                         <button type=".'"button"'." onclick=".'"guardarPermisoOpcionMenuFila('.$id.', '."'eliminar'".', '.$permiso['id'].')"'.">Eliminar</button>";
                     }
+                    
+                    // foreach ($listaPermisosUsuarioORol as $permisoUsuarioPorRol){
+                    //     if(in_array($permiso['id'], array_column($permisoUsuarioPorRol, 'id_Permiso'))){
+                    //         $html.="<p>$permisoUsuarioPorRol['rol']</p>";
+                    //         echo 'asdasd';
+                    //     }
+                    // }
+
+                    // foreach ($listaPermisosUsuarioPorRol as $permisoUsuarioPorRol) {
+                    //     if (in_array($permiso['id'], array_column($permisoUsuarioPorRol, 0, 'id_Permiso'))) {
+                    //         echo 'asdasd';
+                    //         $html .= "<p>".$permisoUsuarioPorRol[1]['rol']."</p>";
+                    //     }
+                    // }
+                    
+                    foreach ($listaPermisosUsuarioPorRol as $permisoUsuarioPorRol) {
+                        // Extraemos el array que contiene los permisos
+                        $permisos = array_column([$permisoUsuarioPorRol[0]], 'id_Permiso');
+                    
+                        // Verificamos si el permiso está en la lista de permisos
+                        if (in_array($permiso['id'], $permisos)) {
+                            $html .= '<p class="backgroundRoles">'.$permisoUsuarioPorRol[1]['rol'].'</p>';
+                            // echo 'asdasd';
+                        }
+                    }
+                    
+                    
 
                     $html.="<br>";
                 }

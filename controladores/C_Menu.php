@@ -25,11 +25,21 @@
             // var_dump($filtros);
             $opcionesMenu=$this->modelo->buscarOpcionesMenu($filtros);
             $permisos=$this->modelo->getPermisos();
+            
+            $listaPermisosUsuarioPorRol=[];
             // añadirPermisosOpcionesMenuFila();
             
             if(isset($filtros['ftextoUsuario'])){
                 $usuario=$filtros['ftextoUsuario'];
                 $listaPermisosUsuarioORol=$this->modelo->buscarPermisosUsuario($usuario);
+
+                $rolesUsuario = $this->modelo->buscarRolesUsuario($filtros['ftextoUsuario']);
+                foreach ($rolesUsuario as $rol) {
+                    $permisosRol = $this->modelo->buscarPermisosRol($rol['id']);
+                    foreach ($permisosRol as $permiso){
+                        $listaPermisosUsuarioPorRol[] = array($permiso, $rol);
+                    }
+                }
             } else {
                 $usuario=0;
             }
@@ -40,7 +50,15 @@
                 $rol=0;
             }
 
-            Vista::render('vistas/menu/V_Menu_Listado.php',array('opcionesMenu'=>$opcionesMenu, 'usuario'=>$usuario, 'rol'=>$rol, 'permisos'=>$permisos, 'listaPermisosUsuarioORol'=>$listaPermisosUsuarioORol));
+            // echo '<pre>';
+            // print_r($listaPermisosUsuarioORol);
+            // echo '</pre>';
+
+            // echo '<pre>';
+            // print_r($listaPermisosUsuarioPorRol);
+            // echo '</pre>';
+
+            Vista::render('vistas/menu/V_Menu_Listado.php',array('opcionesMenu'=>$opcionesMenu, 'usuario'=>$usuario, 'rol'=>$rol, 'permisos'=>$permisos, 'listaPermisosUsuarioORol'=>$listaPermisosUsuarioORol, 'listaPermisosUsuarioPorRol'=>$listaPermisosUsuarioPorRol));
         }
 
         public function getVistaNuevoEditar($datos=array()){
