@@ -425,6 +425,32 @@ function mostrarPermisosOpcionesMenuFila(){
 }
 
 function controlarFiltrosMenu(filtro, valor){
+    const campoGestionRoles = document.getElementById("campoGestionRoles");
+    campoGestionRoles.innerHTML = `
+        <form id="formularioGestionarRol" name="formularioGestionarRol">
+            <div class="form-group col-md-4 col-sm-4">
+                <!-- <label for="">Nombre del rol:</label> -->
+                <input type="text" id="rol" name="rol"
+                class="form-control" placeholder="Texto a buscar" value="">
+            </div>
+        </form>
+        
+        <div>
+            <button type="button" class="btn btn-outline-primary"
+            onclick="guardarRol(${valor}, 'editar')">Editar</button>
+        </div>
+
+        <div>
+            <button type="button" class="btn btn-outline-primary"
+            onclick="guardarRol(${valor}, 'eliminar')">Eliminar</button>
+        </div>
+
+        <div>
+            <button type="button" class="btn btn-outline-primary"
+            onclick="guardarRol(${valor}, 'crear')">Crear</button>
+        </div>
+    `;
+
     console.log("llego", filtro, valor);
     if(filtro === 'usuario'){
         if(valor == 0){
@@ -455,3 +481,41 @@ function actualizarUsuarioORolPorPermiso(usuarioORol, usuarioORolId, permiso){
             throw new Error(res.status);
         })
 }
+
+function guardarRol(id, accion){
+    let opciones = { method: "GET", };
+    let parametros = "controlador=Menu&metodo=guardarRol&id="+id+"&accion="+accion;
+    parametros+='&'+new URLSearchParams(
+                    new FormData(document.getElementById('formularioGestionarRol'))).toString();
+                    console.log("FormData: " + new URLSearchParams(
+                        new FormData(document.getElementById('formularioGestionarRol'))).toString());
+    console.log("Parametros: " + parametros);
+    fetch("C_Frontal.php?" + parametros, opciones)
+        .then(res=>{
+                fetch("C_Frontal.php?controlador=Menu&metodo=getRoles")
+                  .then((response) => response.json())
+                  .then((roles) => {
+                    const roleSelect = document.getElementById("ftextoRol")
+                    roleSelect.innerHTML = '<option value="0">-</option>'
+                    roles.forEach((role) => {
+                      const option = document.createElement("option")
+                      option.value = role.id
+                      option.textContent = role.rol
+                      roleSelect.appendChild(option)
+                    })
+                  })
+                  .catch((error) => {
+                    console.error("Error updating role select:", error)
+                  })
+
+
+            if(res.ok){
+                return res.json();
+            }
+            throw new Error(res.status);
+        })
+        .catch(err=>{
+            console.log("Error al guardar", err.message);
+        })
+}
+

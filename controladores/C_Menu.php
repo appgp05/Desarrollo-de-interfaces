@@ -169,5 +169,41 @@
         public function actualizarUsuarioORolPorPermiso($datos=array()){
             $this->modelo->actualizarUsuarioConPermiso($datos);
         }
+
+        public function guardarRol($datos=array()){
+            $respuesta['correcto']='S';
+            $respuesta['msj']='Creado correctamente.';
+
+            // if(isset($datos['id']) && $datos['id'] !== null && $datos['id'] !== ''){
+            //     $id=$this->modelo->editarRol($datos);
+            // } else {
+            //     $id=$this->modelo->crearRol($datos);
+            // }
+
+            switch ($datos['accion']){
+                case 'crear':
+                    $id=$this->modelo->crearRol($datos);
+                    break;
+                case 'editar':
+                    $id=$this->modelo->editarRol($datos);
+                    break;
+                case 'eliminar':
+                    $id=$this->modelo->eliminarRol($datos);
+                    break;
+            }
+
+
+            if($id>0){
+                //nada, ok
+            } else {
+                $respuesta['correcto']='N';
+                $respuesta['msj']='Error al crear.';
+            }
+            echo json_encode($respuesta);
+        }
+
+        public function getRoles(){
+            echo json_encode($this->modelo->obtenerRoles());
+        }
     }
 ?>

@@ -255,5 +255,35 @@ class M_Menu extends Modelo{
         
         // $this->DAO->insertar($SQL);
     }
+
+    public function obtenerRoles(){
+        $SQL="SELECT * FROM roles;";
+        return $this->DAO->consultar($SQL);
+    }
+
+    public function crearRol($datos){
+        $rol='';
+        extract($datos);
+
+        $SQL="INSERT INTO `roles` (`rol`) VALUES ('$rol');";
+        $this->DAO->insertar($SQL);
+    }
+
+    public function editarRol($datos){
+        $id='';
+        $rol='';
+        extract($datos);
+        // echo $SQL;
+        $SQL="UPDATE roles SET rol = '$rol' WHERE id = $id";
+        $this->DAO->actualizar($SQL);
+    }
+
+    public function eliminarRol($datos){
+        $id='';
+        extract($datos);
+
+        $SQL="DELETE FROM roles WHERE id = $id";
+        $this->DAO->borrar($SQL);
+    }
 }
 ?>

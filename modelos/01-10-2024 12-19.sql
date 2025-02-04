@@ -249,6 +249,8 @@ CREATE TABLE `roles` (
   PRIMARY KEY (`id`)
 );
 INSERT INTO `roles` (`rol`) VALUES
+('visitante');
+INSERT INTO `roles` (`rol`) VALUES
 ('rol1');
 INSERT INTO `roles` (`rol`) VALUES
 ('rol2');

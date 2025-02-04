@@ -18,7 +18,7 @@
             <input type="text" id="ftexto" name="ftexto"
                 class="form-control" placeholder="Texto a buscar" value="">
         </div>
-        <div class="form-group col-md-6 col-sm-12">
+        <div class="form-group col-md-3 col-sm-3">
             <label for="">Usuario:</label>
             <select type="text" id="ftextoUsuario" name="ftextoUsuario"
                 class="form-control" placeholder="Usuario" value=""
@@ -31,18 +31,22 @@
                 ?>
             </select>
         </div>
-        <div class="form-group col-md-6 col-sm-12">
-            <label for="">Rol:</label>
-            <select type="text" id="ftextoRol" name="ftextoRol"
-                class="form-control" placeholder="Rol" value=""
-                onchange="controlarFiltrosMenu('rol', value)">
-                <option value="0">-</option>
-                <?php
-                    foreach($roles as $key => $rol){
-                        echo '<option value="'.$rol['id'].'">'.$rol['rol'].'</option>';
-                    };
-                ?>
-            </select>
+        <div style="display: flex;">
+            <div class="form-group col-md-3 col-sm-3">
+                <label for="">Rol:</label>
+                <select type="text" id="ftextoRol" name="ftextoRol"
+                    class="form-control" placeholder="Rol" value=""
+                    onchange="controlarFiltrosMenu('rol', value)">
+                    <option value="0">-</option>
+                    <?php
+                        foreach($roles as $key => $rol){
+                            echo '<option value="'.$rol['id'].'">'.$rol['rol'].'</option>';
+                        };
+                    ?>
+                </select>
+            </div>
+
+            
         </div>
         <!-- <div class="form-group col-md-6 col-sm-12">
             <label for="factivo">Estado:</label>
@@ -53,10 +57,36 @@
             </select>
         </div> -->
     </form>
+
+    <div id="campoGestionRoles" style="padding-top: 24px; display: flex;">
+        <form id="formularioGestionarRol" name="formularioGestionarRol">
+            <div class="form-group col-md-4 col-sm-4">
+                <!-- <label for="">Nombre del rol:</label> -->
+                <input type="text" id="rol" name="rol"
+                class="form-control" placeholder="Texto a buscar" value="">
+            </div>
+        </form>
+        
+        <div>
+            <button type="button" class="btn btn-outline-primary"
+            onclick="guardarRol(0, 'editar')">Editar</button>
+        </div>
+
+        <div>
+            <button type="button" class="btn btn-outline-primary"
+            onclick="guardarRol(0, 'eliminar')">Eliminar</button>
+        </div>
+
+        <div>
+            <button type="button" class="btn btn-outline-primary"
+            onclick="guardarRol(0, 'crear')">Crear</button>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-lg-12">
             <button type="button" class="btn btn-outline-primary"
-            onclick="buscar('Menu', 'getVistaListadoOpcionesMenu', 'formularioBuscar', 'capaResultadoBusqueda', '')">Buscar</button>
+            onclick="guardarRol('Menu', 'getVistaListadoOpcionesMenu', 'formularioGestionarRol', 'capaResultadoBusqueda', '')">Buscar</button>
             <!-- <button type="button" class="btn btn-outline-secondary"
             onclick="obtenerVista_EditarCrear('Usuarios', 'getVistaNuevoEditar', 'capaEditarCrear', '')">Nuevo</button> -->
         </div>
