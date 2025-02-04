@@ -169,7 +169,12 @@ class M_Menu extends Modelo{
                 id_Menu='$id_Menu',
                 codigo_Permiso='$codigo_Permiso'";
 
-        return $this->DAO->insertar($SQL);
+        $response = $this->DAO->insertar($SQL);
+
+        $SQL="INSERT INTO permisosusuarios VALUES (2, ".$response.")";
+        $this->DAO->insertar($SQL);
+
+        return $response;
     }
 
     public function editarPermisoOpcionMenu($datos=Array()){
