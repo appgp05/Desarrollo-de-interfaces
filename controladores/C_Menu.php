@@ -223,5 +223,9 @@
         public function getRoles(){
             echo json_encode($this->modelo->obtenerRoles());
         }
+
+        public function getRolesUsuario($datos){
+            echo json_encode($this->modelo->buscarRolesUsuario($datos['id']));
+        }
     }
 ?>

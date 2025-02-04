@@ -9,3 +9,8 @@
 .backgroundRoles{
     background-color: #9def9e;
 }
+.assigned-role{
+    background-color: #69abca;
+    font-weight: bold;
+    color: #0056b3;
+}

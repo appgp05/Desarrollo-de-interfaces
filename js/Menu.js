@@ -454,9 +454,38 @@ function controlarFiltrosMenu(filtro, valor){
     console.log("llego", filtro, valor);
     if(filtro === 'usuario'){
         if(valor == 0){
-            document.getElementById('ftextoRol').disabled=false;
+            Array.from(document.getElementById("ftextoRol").options).forEach((option) => {
+                // console.log(option);
+                option.disabled = false;
+                option.classList.remove("assigned-role")
+            });
+            // document.getElementById('ftextoRol').disabled=false;
         } else {
-            document.getElementById('ftextoRol').disabled=true;
+            Array.from(document.getElementById("ftextoRol").options).forEach((option) => {
+                // console.log(option);
+                option.disabled = true;
+                option.classList.remove("assigned-role")
+            });
+
+            fetch("C_Frontal.php?controlador=Menu&metodo=getRolesUsuario&id="+valor)
+            .then((response) => response.json())
+            .then((roles) => {
+                Array.from(document.getElementById("ftextoRol").options).forEach((option) => {
+                    roles.forEach((rol) => {
+                        if(rol.id.includes(option.value)){
+                            option.classList.add("assigned-role")
+                        }  
+                    })
+                })
+
+            })
+            .catch((error) => {
+
+
+            })
+
+
+            // document.getElementById('ftextoRol').disabled=true;
         }
     } else if(filtro === 'rol') {
         if(valor == 0){
@@ -475,8 +504,11 @@ function controlarFiltrosMenu(filtro, valor){
                 onclick="guardarRol(${valor}, 'crear')">Crear</button>
             </div>
             `;
-
-            document.getElementById('ftextoUsuario').disabled=false;
+            Array.from(document.getElementById("ftextoUsuario").options).forEach((option) => {
+                // console.log(option);
+                option.disabled = false;
+            });
+            // document.getElementById('ftextoUsuario').disabled=false;
         } else {
             const campoGestionRoles = document.getElementById("campoGestionRoles");
             campoGestionRoles.innerHTML = `
@@ -503,7 +535,11 @@ function controlarFiltrosMenu(filtro, valor){
             // var selectedText = select.options[select.selectedIndex].text;
 
             document.getElementById('rol').value = document.getElementById('ftextoRol').options[document.getElementById('ftextoRol').selectedIndex].text;
-            document.getElementById('ftextoUsuario').disabled=true;
+            Array.from(document.getElementById("ftextoUsuario").options).forEach((option) => {
+                // console.log(option);
+                option.disabled = true;
+            });
+            // document.getElementById('ftextoUsuario').disabled=true;
         }
     }
 }
