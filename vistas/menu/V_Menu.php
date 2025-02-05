@@ -95,28 +95,40 @@ function menuOptions($items, $parent = 0) {
     $html = '';
     foreach ($items as $item) {
         if ($item['padre_id'] == $parent) {
-            if ($item['es_dropdown']) {
-                $html .= '<li class="nav-item dropdown">';
-                $html .= '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">' . htmlspecialchars($item['titulo']) . '</a>';
-                $html .= '<ul class="dropdown-menu">';
-                $html .= menuOptions($items, $item['id']);
-                $html .= '</ul>';
-            } else {
-                $html .= '<li class="nav-item">';
-                $controladorMenu = '';
-                $metodoMenu = '';
-                $destinoMenu = '';
-                $onclick = '';
-                if ($item['controladorMenu']!='' && $item['metodoMenu'] && $item['destinoMenu']) {
-                    $controladorMenu = $item['controladorMenu'];
-                    $metodoMenu = $item['metodoMenu'];
-                    $destinoMenu = $item['destinoMenu'];
-                    $onclick = '\''.$controladorMenu.'\', \''.$metodoMenu.'\', \''.$destinoMenu.'\'';
-                    $onclick = ' onclick="obtenerVista('.$onclick.');"';
+            // echo str_replace(' ', '', strtolower('acceso'.$item['titulo']));
+            // echo $_SESSION['permisosSesion'];
+            
+            $permisoBuscado = strtolower(str_replace(' ', '', 'acceso' . $item['titulo']));  // Formato del permiso a buscar
+                        
+            $permisosSesion = array_map('strtolower', array_column($_SESSION['permisosSesion'], 'permiso'));
+
+            if (in_array($permisoBuscado, $permisosSesion)) {
+            
+            
+            // if(strtolower(array_column($_SESSION['permisosSesion'], 'permiso')).include(str_replace(' ', '', strtolower('acceso'.$item['titulo'])))){
+                if ($item['es_dropdown']) {
+                    $html .= '<li class="nav-item dropdown">';
+                    $html .= '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">' . htmlspecialchars($item['titulo']) . '</a>';
+                    $html .= '<ul class="dropdown-menu">';
+                    $html .= menuOptions($items, $item['id']);
+                    $html .= '</ul>';
+                } else {
+                    $html .= '<li class="nav-item">';
+                    $controladorMenu = '';
+                    $metodoMenu = '';
+                    $destinoMenu = '';
+                    $onclick = '';
+                    if ($item['controladorMenu']!='' && $item['metodoMenu'] && $item['destinoMenu']) {
+                        $controladorMenu = $item['controladorMenu'];
+                        $metodoMenu = $item['metodoMenu'];
+                        $destinoMenu = $item['destinoMenu'];
+                        $onclick = '\''.$controladorMenu.'\', \''.$metodoMenu.'\', \''.$destinoMenu.'\'';
+                        $onclick = ' onclick="obtenerVista('.$onclick.');"';
+                    }
+                    $html .= '<a class="nav-link"' . $onclick . ' href="' . htmlspecialchars($item['url']) . '">' . htmlspecialchars($item['titulo']) . '</a>';
                 }
-                $html .= '<a class="nav-link"' . $onclick . ' href="' . htmlspecialchars($item['url']) . '">' . htmlspecialchars($item['titulo']) . '</a>';
+                $html .= '</li>';
             }
-            $html .= '</li>';
         }
     }
     return $html;

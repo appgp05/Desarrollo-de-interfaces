@@ -217,6 +217,7 @@ CREATE TABLE `permisos` (
   `codigo_Permiso` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
 );
+
 INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
 ('accesoHome', 1, 'ACS_M');
 INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
@@ -243,6 +244,8 @@ DROP TABLE IF EXISTS permisosusuarios;
   `id_Permiso` int(11) NOT NULL,
   PRIMARY KEY (`id_Usuario`, `id_Permiso`)
 );
+INSERT INTO `permisosusuarios` VALUES
+(2, 6);
 
 DROP TABLE IF EXISTS permisosroles;
 CREATE TABLE `permisosroles` (
@@ -260,8 +263,8 @@ INSERT INTO `permisosroles` VALUES
 (1, 4);
 INSERT INTO `permisosroles` VALUES
 (1, 5);
-INSERT INTO `permisosroles` VALUES
-(1, 6);
+-- INSERT INTO `permisosroles` VALUES
+-- (1, 6);
 INSERT INTO `permisosroles` VALUES
 (1, 7);
 
