@@ -227,5 +227,60 @@
         public function getRolesUsuario($datos){
             echo json_encode($this->modelo->buscarRolesUsuario($datos['id']));
         }
+
+        public function getPermisosUsuarioSesion($datos){
+            $permisosUsuarioSesion = $this->modelo->buscarPermisosUsuario($datos['id']);
+            $rolesUsuario = $this->modelo->buscarRolesUsuario($datos['id']);
+            foreach($rolesUsuario as $rol){
+                $permisosRol = $this->modelo->buscarPermisosRol($rol['id']);
+                foreach($permisosRol as $permiso){
+                    $permisosUsuarioSesion[] = $permiso;
+                }
+            }
+
+            $permisosVisitante = $this->modelo->buscarPermisosRol(1);
+                foreach($permisosVisitante as $permiso){
+                    $permisosUsuarioSesion[] = $permiso;
+                }
+
+            foreach($permisosUsuarioSesion as $permiso){
+                $permisosUsuarioSesionFinal[] = $this->modelo->obtenerPermiso($permiso['id_Permiso'])[0];
+            }
+
+            usort($permisosUsuarioSesionFinal, function($a, $b) {
+                return $a['id'] <=> $b['id'];
+            });
+
+            $unique = [];
+            foreach ($permisosUsuarioSesionFinal as $item) {
+                if (!isset($unique[$item['id']])) {
+                    $unique[$item['id']] = $item;  // Store the item using 'id' as the key
+                }
+            }
+
+            $permisosUsuarioSesionFinal = $unique;
+
+            echo '<pre>';
+            print_r($permisosUsuarioSesionFinal);
+            echo '</pre>';
+
+            return [];
+        }
+
+        // public function getRoles(){
+        //     echo json_encode($this->modelo->obtenerRoles());
+        // }
+
+        // public function getPermisosUsuario($datos){
+        //     echo json_encode($this->modelo->buscarPermisosUsuario($datos['id']));
+        // }
+
+        // public function getPermisosRol($datos){
+        //     echo json_encode($this->modelo->buscarPermisosRol($datos['id']));
+        // }
+
+        // public function getRolesUsuario($datos){
+        //     echo json_encode($this->modelo->buscarRolesUsuario($datos['id']));
+        // }
     }
 ?>

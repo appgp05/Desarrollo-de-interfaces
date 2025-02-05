@@ -14,8 +14,16 @@
 
         if($id_Usuario!=''){
             $_SESSION['usuario']=$usuario;
+
+            require_once 'controladores/C_Menu.php';
+            $controladorMenu = new C_Menu();
+    
+            $permisosUsuarioSesion = $controladorMenu->getPermisosUsuarioSesion(array('id'=>$id_Usuario));
+
+            $_SESSION['permisosSesion']=$permisosUsuarioSesion;
+
             //Saltar a ésta página (No puede haber pintado nada antes)
-            header('Location: index.php');
+            // header('Location: index.php');
         } else {
             unset($_SESSION['login']);
             unset($_SESSION['id_Usuario']);

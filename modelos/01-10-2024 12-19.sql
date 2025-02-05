@@ -26,30 +26,6 @@ USE `di2024`;
 
 -- --------------------------------------------------------
 
-DROP TABLE IF EXISTS menu;
-CREATE TABLE `menu` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `titulo` varchar(255) NOT NULL,
-  `url` varchar(255) DEFAULT NULL,
-  `nivel` int(11) NOT NULL,
-  `padre_id` int(11) DEFAULT NULL,
-  `orden` int(11) NOT NULL,
-  `es_dropdown` tinyint(1) NOT NULL DEFAULT 0,
-  `controladorMenu` varchar(255) DEFAULT NULL,
-  `metodoMenu` varchar(255) DEFAULT NULL,
-  `destinoMenu` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
-
-INSERT INTO `menu` (`id`, `titulo`, `url`, `nivel`, `padre_id`, `orden`, `es_dropdown`, `controladorMenu`, `metodoMenu`, `destinoMenu`) VALUES
-(1, 'Home', '#', 1, 0, 1, 0, NULL, null, null),
-(2, 'Features', '#', 1, 0, 2, 0, NULL, null, null),
-(3, 'Pricing', '#', 1, 0, 3, 0, NULL, null, null),
-(4, 'Dropdown link', '#', 1, 0, 4, 1, NULL, null, null),
-(5, 'Usuario', '#', 2, 4, 1, 0, 'Usuarios', 'getVistaFiltros', 'capaContenido'),
-(6, 'Menu', '#', 2, 4, 2, 0, 'Menu', 'getVistaFiltros', 'capaContenido'),
-(7, 'Something else here', '#', 2, 4, 3, 0, NULL, null, null);
-
 --
 -- Estructura de tabla para la tabla `usuarios`
 --
@@ -209,6 +185,30 @@ INSERT INTO `usuarios` (`id_Usuario`, `nombre`, `apellido_1`, `apellido_2`, `sex
 (506, 'xxxx', 'xxxx', 'xxxx', 'H', '2023-11-09', 'xxxxxxxx@2si2024', '', 'xxxxxyyz', '0c0b3da4ac402bd86191d959be081114', 'S'),
 (516, 'xxxx', 'xxxx', 'xxxx', 'H', '2023-11-09', 'xxxxxxxx@2si2024', '', 'xxxxxyyzdd', '0c0b3da4ac402bd86191d959be081114', 'S');
 
+DROP TABLE IF EXISTS menu;
+CREATE TABLE `menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(255) NOT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `nivel` int(11) NOT NULL,
+  `padre_id` int(11) DEFAULT NULL,
+  `orden` int(11) NOT NULL,
+  `es_dropdown` tinyint(1) NOT NULL DEFAULT 0,
+  `controladorMenu` varchar(255) DEFAULT NULL,
+  `metodoMenu` varchar(255) DEFAULT NULL,
+  `destinoMenu` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+INSERT INTO `menu` (`id`, `titulo`, `url`, `nivel`, `padre_id`, `orden`, `es_dropdown`, `controladorMenu`, `metodoMenu`, `destinoMenu`) VALUES
+(1, 'Home', '#', 1, 0, 1, 0, NULL, null, null),
+(2, 'Features', '#', 1, 0, 2, 0, NULL, null, null),
+(3, 'Pricing', '#', 1, 0, 3, 0, NULL, null, null),
+(4, 'Dropdown link', '#', 1, 0, 4, 1, NULL, null, null),
+(5, 'Usuario', '#', 2, 4, 1, 0, 'Usuarios', 'getVistaFiltros', 'capaContenido'),
+(6, 'Menu', '#', 2, 4, 2, 0, 'Menu', 'getVistaFiltros', 'capaContenido'),
+(7, 'Something else here', '#', 2, 4, 3, 0, NULL, null, null);
+
 DROP TABLE IF EXISTS permisos;
 CREATE TABLE `permisos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -218,15 +218,24 @@ CREATE TABLE `permisos` (
   PRIMARY KEY (`id`)
 );
 INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
-('acceso', 1, 'ACS_M');
+('accesoHome', 1, 'ACS_M');
 INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
-('accesoo', 3, 'ACS_M');
+('accesoFeatures', 2, 'ACS_M');
 INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
-('accesooo', 4, 'ACS_M');
+('accesoPricing', 3, 'ACS_M');
 INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
-('accesoooo', 5, 'ACS_M');
+('accesoDropdownLink', 4, 'ACS_M');
 INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
-('accesooooo', 6, 'ACS_M');
+('accesoUsuario', 5, 'ACS_M');
+INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
+('accesoMenu', 6, 'ACS_M');
+INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
+('accesoSomethingElseHere', 7, 'ACS_M');
+
+INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
+('permisoPrueba', 1, 'ACS_M');
+INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
+('permisoPrueba2', 2, 'ACS_M');
 
 DROP TABLE IF EXISTS permisosusuarios;
   CREATE TABLE `permisosusuarios` (
@@ -241,6 +250,20 @@ CREATE TABLE `permisosroles` (
   `id_Permiso` int(11) NOT NULL,
   PRIMARY KEY (`id_Rol`, `id_Permiso`)
 );
+INSERT INTO `permisosroles` VALUES
+(1, 1);
+INSERT INTO `permisosroles` VALUES
+(1, 2);
+INSERT INTO `permisosroles` VALUES
+(1, 3);
+INSERT INTO `permisosroles` VALUES
+(1, 4);
+INSERT INTO `permisosroles` VALUES
+(1, 5);
+INSERT INTO `permisosroles` VALUES
+(1, 6);
+INSERT INTO `permisosroles` VALUES
+(1, 7);
 
 DROP TABLE IF EXISTS roles;
 CREATE TABLE `roles` (
@@ -262,6 +285,9 @@ CREATE TABLE `rolesusuarios` (
   `id_Usuario` int(11) NOT NULL,
   `id_rol` int(11) NOT NULL
 );
+
+INSERT INTO `rolesusuarios` VALUES
+(1, 2);
 
 --
 -- Índices para tablas volcadas

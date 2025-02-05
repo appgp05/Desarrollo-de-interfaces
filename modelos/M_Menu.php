@@ -225,6 +225,11 @@ class M_Menu extends Modelo{
         return $this->DAO->consultar($SQL);
     }
 
+    public function obtenerPermiso($id){
+        $SQL="SELECT * FROM permisos WHERE id = ".$id;
+        return $this->DAO->consultar($SQL);
+    }
+
     public function actualizarUsuarioConPermiso($datos=Array()){
         // $SQL="UPDATE `usuarios` SET `activo` = CASE WHEN `activo` = 'N' THEN 'S' ELSE 'N' END WHERE `id_Usuario` = '$id_Usuario';";
         // $SQL="CASE NOT EXISTS INSERT INTO permisosusuarios VALUES ( 1, 3); ELSE DELETE FROM permisosusuarios WHERE id_Usuario = 1 AND id_Permiso = 3";
