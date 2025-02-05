@@ -1,9 +1,9 @@
 <?php session_start();
-    if($_SESSION['usuario']){
+    // if($_SESSION['usuario']){
 
-    } else {
-        header('Location: login.php');
-    }
+    // } else {
+    //     header('Location: login.php');
+    // }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -23,12 +23,20 @@
                 </div>
                 <div class="col-md-2 col-sm-3 d-none d-sm-block">
                     login
-                    <?php echo $_SESSION['usuario']; ?>
+                    <?php if(isset($_SESSION['usuario'])){ echo $_SESSION['usuario'];}; ?>
+                    <a class="btn btn-primary" href="login.php">Login</a>
+                    <a class="btn btn-primary" href="logout.php">Cerrar sesión</a>
                 </div>
             </div>
         </div>
         <?php
         
+        if(isset($_SESSION['permisosSesion'])){
+            echo '<pre>';
+            print_r($_SESSION['permisosSesion']);
+            echo '</pre>';
+        }
+
         require_once 'controladores/C_Menu.php';
         $menuController = new C_Menu;
         $menu = $menuController->renderMenu();

@@ -23,7 +23,7 @@
             $_SESSION['permisosSesion']=$permisosUsuarioSesion;
 
             //Saltar a ésta página (No puede haber pintado nada antes)
-            // header('Location: index.php');
+            header('Location: index.php');
         } else {
             unset($_SESSION['login']);
             unset($_SESSION['id_Usuario']);

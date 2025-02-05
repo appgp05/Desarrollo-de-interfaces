@@ -228,6 +228,27 @@
             echo json_encode($this->modelo->buscarRolesUsuario($datos['id']));
         }
 
+        public function getPermisosVisitanteSesion(){
+            $permisosVisitante = $this->modelo->buscarPermisosRol(1);
+                foreach($permisosVisitante as $permiso){
+                    $permisosUsuarioSesion[] = $permiso;
+                }
+
+            echo '<pre>';
+            print_r($permisosVisitante);
+            echo '</pre>';
+
+            return $permisosVisitante;
+        }
+
+        public function obtenerPermisosRol($id){
+            $permisosRol = $this->modelo->obtenerPermiso($id);
+            // foreach($permisosRol as $permiso){
+            //     $permisosRolSesion[] = $permiso;
+            // }
+            return $permisosRol;
+        }
+
         public function getPermisosUsuarioSesion($datos){
             $permisosUsuarioSesion = $this->modelo->buscarPermisosUsuario($datos['id']);
             $rolesUsuario = $this->modelo->buscarRolesUsuario($datos['id']);
@@ -264,7 +285,7 @@
             print_r($permisosUsuarioSesionFinal);
             echo '</pre>';
 
-            return [];
+            return $permisosUsuarioSesionFinal;
         }
 
         // public function getRoles(){
