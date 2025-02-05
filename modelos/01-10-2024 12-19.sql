@@ -234,9 +234,16 @@ INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
 ('accesoSomethingElseHere', 7, 'ACS_M');
 
 INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
-('permisoPrueba', 1, 'ACS_M');
+('añadirUsuario', 5, 'ACS_M');
 INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
-('permisoPrueba2', 2, 'ACS_M');
+('editarUsuario', 5, 'ACS_M');
+
+INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
+('añadirPermiso', 6, 'ACS_M');
+INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
+('editarUsuario', 6, 'ACS_M');
+INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
+('eliminarUsuario', 6, 'ACS_M');
 
 DROP TABLE IF EXISTS permisosusuarios;
   CREATE TABLE `permisosusuarios` (

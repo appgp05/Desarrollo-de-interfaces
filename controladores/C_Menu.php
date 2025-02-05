@@ -234,9 +234,9 @@
                     $permisosUsuarioSesion[] = $permiso;
                 }
 
-            echo '<pre>';
-            print_r($permisosVisitante);
-            echo '</pre>';
+            // echo '<pre>';
+            // print_r($permisosVisitante);
+            // echo '</pre>';
 
             return $permisosVisitante;
         }

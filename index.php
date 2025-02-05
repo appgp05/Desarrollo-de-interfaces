@@ -32,9 +32,17 @@
         <?php
         
         if(isset($_SESSION['permisosSesion'])){
-            echo '<pre>';
-            print_r($_SESSION['permisosSesion']);
-            echo '</pre>';
+            // echo '<pre>';
+            // print_r($_SESSION['permisosSesion']);
+            // echo '</pre>';
+        } else {
+            require_once 'controladores/C_Menu.php';
+            $controladorMenu = new C_Menu();
+
+            $permisosVisitanteSesion = $controladorMenu->getPermisosVisitanteSesion();
+            foreach($permisosVisitanteSesion as $permiso){
+                $_SESSION['permisosSesion'][] = $controladorMenu->obtenerPermisosRol($permiso['id_Permiso'])[0];
+    }
         }
 
         require_once 'controladores/C_Menu.php';
