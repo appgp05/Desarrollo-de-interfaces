@@ -241,9 +241,9 @@ INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
 INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
 ('añadirPermiso', 6, 'ACS_M');
 INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
-('editarUsuario', 6, 'ACS_M');
+('editarPermiso', 6, 'ACS_M');
 INSERT INTO `permisos` (`permiso`, `id_Menu`, `codigo_Permiso`) VALUES
-('eliminarUsuario', 6, 'ACS_M');
+('eliminarPermiso', 6, 'ACS_M');
 
 DROP TABLE IF EXISTS permisosusuarios;
   CREATE TABLE `permisosusuarios` (
