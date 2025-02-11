@@ -63,7 +63,7 @@
             <div class="form-group col-md-4 col-sm-4">
                 <!-- <label for="">Nombre del rol:</label> -->
                 <input type="text" id="rol" name="rol"
-                class="form-control" placeholder="Texto a buscar" value="">
+                class="form-control" placeholder="Gestionar rol" value="">
             </div>
         </form>
         
@@ -81,6 +81,9 @@
             <button type="button" class="btn btn-outline-primary"
             onclick="guardarRol(0, 'crear')">Crear</button>
         </div>
+    </div>
+
+    <div id="campoGestionRolesUsuarios" style="padding-top: 24px; display: flex;">
     </div>
 
     <div class="row">

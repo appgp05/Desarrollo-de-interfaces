@@ -209,6 +209,11 @@ class M_Menu extends Modelo{
         return $this->DAO->consultar($SQL);
     }
 
+    public function comprobarRolUsuario($usuario, $rol){
+        $SQL="SELECT * FROM rolesusuarios WHERE id_Usuario = $usuario AND id_rol = $rol";
+        return $this->DAO->consultar($SQL);
+    }
+
     public function buscarUsuarios(){
         $SQL="SELECT * FROM usuarios";
         return $this->DAO->consultar($SQL);
@@ -298,6 +303,16 @@ class M_Menu extends Modelo{
         extract($datos);
 
         $SQL="DELETE FROM roles WHERE id = $id";
+        $this->DAO->borrar($SQL);
+    }
+
+    public function añadirRolUsuario($usuario, $rol){
+        $SQL="INSERT INTO rolesusuarios VALUES($usuario, $rol)";
+        $this->DAO->insertar($SQL);
+    }
+
+    public function eliminarRolUsuario($usuario, $rol){
+        $SQL="DELETE FROM rolesusuarios WHERE id_Usuario = $usuario AND id_rol = $rol";
         $this->DAO->borrar($SQL);
     }
 }

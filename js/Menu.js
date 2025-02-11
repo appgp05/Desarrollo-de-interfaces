@@ -542,6 +542,29 @@ function controlarFiltrosMenu(filtro, valor){
             // document.getElementById('ftextoUsuario').disabled=true;
         }
     }
+
+    controlarAmbosFiltrosMenu();
+}
+
+function controlarAmbosFiltrosMenu(){
+    const usuario = document.getElementById('ftextoUsuario').value;
+    const rol = document.getElementById('ftextoRol').value;
+
+    const campoGestionRolesUsuarios = document.getElementById('campoGestionRolesUsuarios');
+
+    if(usuario == 0 || rol == 0){
+        // console.log("ambos distintos");
+        campoGestionRolesUsuarios.innerHTML = ``;
+    } else {
+        campoGestionRolesUsuarios.innerHTML = `
+        <div>
+            <button type="button" class="btn btn-outline-primary"
+            onclick="añadirEliminarRolUsuario();">Añadir/Eliminar rol al usuario</button>
+        </div>
+        `;
+    }
+
+    console.log("controlarAmbosFiltrosMenu", usuario, rol)
 }
 
 function actualizarUsuarioORolPorPermiso(usuarioORol, usuarioORolId, permiso){
@@ -597,3 +620,25 @@ function guardarRol(id, accion){
         })
 }
 
+function añadirEliminarRolUsuario(){
+    const usuario = document.getElementById('ftextoUsuario').value;
+    const rol = document.getElementById('ftextoRol').value;
+
+    fetch("C_Frontal.php?controlador=Menu&metodo=añadirEliminarRolUsuario&usuario=" + usuario + "&rol=" + rol)
+            .then((response) => response.json())
+            .then((roles) => {
+                console.log("llegosdasdsd", roles);
+                // Array.from(document.getElementById("ftextoRol").options).forEach((option) => {
+                //     roles.forEach((rol) => {
+                //         if(rol.id.includes(option.value)){
+                //             option.classList.add("assigned-role")
+                //         }  
+                //     })
+                // })
+
+                controlarFiltrosMenu('usuario', usuario)
+            })
+            .catch((error) => {
+                console.log("error: ", error);
+            })
+}

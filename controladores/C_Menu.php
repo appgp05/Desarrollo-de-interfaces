@@ -293,6 +293,30 @@
             return $permisosUsuarioSesionFinal;
         }
 
+        public function añadirEliminarRolUsuario($datos){
+            $usuario = $datos['usuario'];
+            $rol = $datos['rol'];
+
+            $check=$this->modelo->comprobarRolUsuario($usuario, $rol);
+
+            // print_r($check);
+
+            if($check == []){
+                $id=$this->modelo->añadirRolUsuario($usuario, $rol);
+            } else {
+                $id=$this->modelo->eliminarRolUsuario($usuario, $rol);
+            }
+
+            if($id>0){
+                //nada, ok
+            } else {
+                $respuesta['correcto']='N';
+                $respuesta['msj']='Error al crear.';
+            }
+
+            echo json_encode($respuesta);
+        }
+
         // public function getRoles(){
         //     echo json_encode($this->modelo->obtenerRoles());
         // }
