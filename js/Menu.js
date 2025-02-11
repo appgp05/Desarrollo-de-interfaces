@@ -456,14 +456,14 @@ function controlarFiltrosMenu(filtro, valor){
         if(valor == 0){
             Array.from(document.getElementById("ftextoRol").options).forEach((option) => {
                 // console.log(option);
-                option.disabled = false;
+                // option.disabled = false;
                 option.classList.remove("assigned-role")
             });
             // document.getElementById('ftextoRol').disabled=false;
         } else {
             Array.from(document.getElementById("ftextoRol").options).forEach((option) => {
                 // console.log(option);
-                option.disabled = true;
+                // option.disabled = true;
                 option.classList.remove("assigned-role")
             });
 
@@ -506,7 +506,7 @@ function controlarFiltrosMenu(filtro, valor){
             `;
             Array.from(document.getElementById("ftextoUsuario").options).forEach((option) => {
                 // console.log(option);
-                option.disabled = false;
+                // option.disabled = false;
             });
             // document.getElementById('ftextoUsuario').disabled=false;
         } else {
@@ -537,7 +537,7 @@ function controlarFiltrosMenu(filtro, valor){
             document.getElementById('rol').value = document.getElementById('ftextoRol').options[document.getElementById('ftextoRol').selectedIndex].text;
             Array.from(document.getElementById("ftextoUsuario").options).forEach((option) => {
                 // console.log(option);
-                option.disabled = true;
+                // option.disabled = true;
             });
             // document.getElementById('ftextoUsuario').disabled=true;
         }

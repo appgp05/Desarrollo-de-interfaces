@@ -26,10 +26,11 @@
             $opcionesMenu=$this->modelo->buscarOpcionesMenu($filtros);
             $permisos=$this->modelo->getPermisos();
             
+            $listaPermisosUsuarioORol=[];
             $listaPermisosUsuarioPorRol=[];
             // añadirPermisosOpcionesMenuFila();
             
-            if(isset($filtros['ftextoUsuario'])){
+            if(isset($filtros['ftextoUsuario']) && $filtros['ftextoUsuario'] != 0){
                 $usuario=$filtros['ftextoUsuario'];
                 $listaPermisosUsuarioORol=$this->modelo->buscarPermisosUsuario($usuario);
 
@@ -43,7 +44,7 @@
             } else {
                 $usuario=0;
             }
-            if(isset($filtros['ftextoRol'])){
+            if(isset($filtros['ftextoRol']) && $filtros['ftextoRol'] != 0){
                 $rol=$filtros['ftextoRol'];
                 $listaPermisosUsuarioORol=$this->modelo->buscarPermisosRol($rol);
             } else {
