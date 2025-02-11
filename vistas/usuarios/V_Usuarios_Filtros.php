@@ -19,8 +19,26 @@
         <div class="col-lg-12">
             <button type="button" class="btn btn-outline-primary"
             onclick="buscar('Usuarios', 'getVistaListadoUsuarios', 'formularioBuscar', 'capaResultadoBusqueda')">Buscar</button>
-            <button type="button" class="btn btn-outline-secondary"
-            onclick="obtenerVista_EditarCrear('Usuarios', 'getVistaNuevoEditar', 'capaEditarCrear', '')">Nuevo</button>
+            <?php
+            session_start();
+            $permisosSesion = array_map('strtolower', array_column($_SESSION['permisosSesion'], 'permiso'));
+            
+            $permisoBuscado = 'añadirusuario';
+
+            // echo '<pre>';
+            // print_r($permisosSesion);
+            // echo '</pre>';
+
+            if (in_array($permisoBuscado, $permisosSesion)) {
+                $html='
+                <button type="button" class="btn btn-outline-secondary"
+                onclick="obtenerVista_EditarCrear('."'Usuarios', 'getVistaNuevoEditar', 'capaEditarCrear', ''".')">Nuevo</button>
+                ';
+
+                echo $html;
+            }
+
+            ?>
         </div>
     </div>
 </div>

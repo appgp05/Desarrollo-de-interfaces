@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 class V_Menu_PermisosOpcionfila{
     static public function getPermisosOpcionMenuFila($id, $permisosGenerales, $permisosOpcionMenu, $listaPermisosUsuarioORol, $listaPermisosUsuarioPorRol, $usuario, $rol){
         // console.log("llego " + id + " " + originalTrId);
@@ -22,11 +22,18 @@ class V_Menu_PermisosOpcionfila{
         $html .= '<tr id="permissionTr'.$id.'">';
         if($usuario == 0 && $rol == 0){
             $html .= '  <td>
-                            <form class="formularioEdicion" name="formularioEdicion">
-                                <input type="text" id="permiso" name="permiso" placeholder="Permiso">
+                            <form class="formularioEdicion" name="formularioEdicion">';
+                                
+                            $permisoBuscado = 'añadirpermiso';
+                            $permisosSesion = array_map('strtolower', array_column($_SESSION['permisosSesion'], 'permiso'));
+
+                            if (in_array($permisoBuscado, $permisosSesion)) {
+                                $html.='<input type="text" id="permiso" name="permiso" placeholder="Permiso">
                                 <input type="text" id="codigo_Permiso" name="codigo_Permiso" placeholder="Código permiso">
-                                <button type="button" onclick="guardarPermisoOpcionMenuFila('.$id.', '."'insertar'".')">Añadir permiso</button>
-                            </form>
+                                <button type="button" onclick="guardarPermisoOpcionMenuFila('.$id.', '."'insertar'".')">Añadir permiso</button>';
+                            }
+
+                            $html.='</form>
                         </td>';
 
         }
@@ -56,8 +63,34 @@ class V_Menu_PermisosOpcionfila{
                     ";
 
                     if($usuario == 0 && $rol == 0){
-                        $html.="<button onclick=".'"abrirEdicionPermisoOpcionMenuFila('.$id.' , '."'".$permiso['permiso']."'".' , '."'".$permiso['codigo_Permiso']."'".' , '.$permiso['id'].')"'.">Editar</button>
-                        <button type=".'"button"'." onclick=".'"guardarPermisoOpcionMenuFila('.$id.', '."'eliminar'".', '.$permiso['id'].')"'.">Eliminar</button>";
+                        // if (session_status() == PHP_SESSION_NONE) {
+                        //     session_start(); // Start the session only if it's not already started
+                        // }
+                        $permisosSesion = array_map('strtolower', array_column($_SESSION['permisosSesion'], 'permiso'));
+                        
+                        // echo '<pre>';
+                        // print_r($permisosSesion);
+                        // echo '</pre>';
+
+                        $permisoBuscado = 'editarpermiso';
+
+                        if (in_array($permisoBuscado, $permisosSesion)) {
+                            $html.="<button onclick=".'"abrirEdicionPermisoOpcionMenuFila('.$id.' , '."'".$permiso['permiso']."'".' , '."'".$permiso['codigo_Permiso']."'".' , '.$permiso['id'].', ';
+                            
+                            $permisoBuscado = 'añadirpermiso';
+                            if(in_array($permisoBuscado, $permisosSesion)){
+                                $html.='true';
+                            } else {
+                                $html.='false';
+                            }
+                            $html.=')"'.">Editar</button>";
+                        }
+
+                        $permisoBuscado = 'eliminarpermiso';
+
+                        if (in_array($permisoBuscado, $permisosSesion)) {
+                            $html.="<button type=".'"button"'." onclick=".'"guardarPermisoOpcionMenuFila('.$id.', '."'eliminar'".', '.$permiso['id'].')"'.">Eliminar</button>";
+                        }
                     }
                     
                     // foreach ($listaPermisosUsuarioORol as $permisoUsuarioPorRol){

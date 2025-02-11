@@ -41,12 +41,30 @@
             $respuesta['correcto']='S';
             $respuesta['msj']='Guardado correctamente.';
 
+            // session_start();
+            // $permisosSesion = array_map('strtolower', array_column($_SESSION['permisosSesion'], 'permiso'));
+
             if( isset($datos['id_Usuario']) && $datos['id_Usuario'] !== null && $datos['id_Usuario'] !== ''){
                 // echo "<script>console.log(\"Usuario Editado\")</script>";
-                $id=$this->modelo->editarUsuario($datos);
+
+                // echo '<pre>';
+                // print_r($permisosSesion);
+                // echo '</pre>';
+
+                // $permisoBuscado = 'añadirusuario';
+
+                // if (in_array($permisoBuscado, $permisosSesion)) {
+                    // echo "asdhkahjkisdfkndfgddd dddddddddddd";
+                    $id=$this->modelo->editarUsuario($datos);
+                // }
             } else {
                 // echo "<script>console.log(\"Usuario Insertado\")</script>";
-                $id=$this->modelo->insertarUsuario($datos);
+
+                // $permisoBuscado = 'editarusuario';
+
+                // if (in_array($permisoBuscado, $permisosSesion)) {
+                    $id=$this->modelo->insertarUsuario($datos);
+                // }
             }
 
 

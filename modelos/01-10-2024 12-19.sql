@@ -253,6 +253,16 @@ DROP TABLE IF EXISTS permisosusuarios;
 );
 INSERT INTO `permisosusuarios` VALUES
 (2, 6);
+INSERT INTO `permisosusuarios` VALUES
+(2, 8);
+INSERT INTO `permisosusuarios` VALUES
+(2, 9);
+INSERT INTO `permisosusuarios` VALUES
+(2, 10);
+INSERT INTO `permisosusuarios` VALUES
+(2, 11);
+INSERT INTO `permisosusuarios` VALUES
+(2, 12);
 
 DROP TABLE IF EXISTS permisosroles;
 CREATE TABLE `permisosroles` (
