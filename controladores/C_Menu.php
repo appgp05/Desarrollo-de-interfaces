@@ -22,44 +22,48 @@
         }
 
         public function getVistaListadoOpcionesMenu($filtros=array()){
-            // var_dump($filtros);
-            $opcionesMenu=$this->modelo->buscarOpcionesMenu($filtros);
-            $permisos=$this->modelo->getPermisos();
-            
-            $listaPermisosUsuarioORol=[];
-            $listaPermisosUsuarioPorRol=[];
-            // añadirPermisosOpcionesMenuFila();
-            
-            if(isset($filtros['ftextoUsuario']) && $filtros['ftextoUsuario'] != 0){
-                $usuario=$filtros['ftextoUsuario'];
-                $listaPermisosUsuarioORol=$this->modelo->buscarPermisosUsuario($usuario);
+            if(isset($filtros['ftextoUsuario']) && isset($filtros['ftextoRol']) && $filtros['ftextoUsuario'] == 0 || $filtros['ftextoRol'] == 0){
+                // var_dump($filtros);
+                $opcionesMenu=$this->modelo->buscarOpcionesMenu($filtros);
+                $permisos=$this->modelo->getPermisos();
+                
+                $listaPermisosUsuarioORol=[];
+                $listaPermisosUsuarioPorRol=[];
+                // añadirPermisosOpcionesMenuFila();
+                
+                if(isset($filtros['ftextoUsuario']) && $filtros['ftextoUsuario'] != 0){
+                    $usuario=$filtros['ftextoUsuario'];
+                    $listaPermisosUsuarioORol=$this->modelo->buscarPermisosUsuario($usuario);
 
-                $rolesUsuario = $this->modelo->buscarRolesUsuario($filtros['ftextoUsuario']);
-                foreach ($rolesUsuario as $rol) {
-                    $permisosRol = $this->modelo->buscarPermisosRol($rol['id']);
-                    foreach ($permisosRol as $permiso){
-                        $listaPermisosUsuarioPorRol[] = array($permiso, $rol);
+                    $rolesUsuario = $this->modelo->buscarRolesUsuario($filtros['ftextoUsuario']);
+                    foreach ($rolesUsuario as $rol) {
+                        $permisosRol = $this->modelo->buscarPermisosRol($rol['id']);
+                        foreach ($permisosRol as $permiso){
+                            $listaPermisosUsuarioPorRol[] = array($permiso, $rol);
+                        }
                     }
+                } else {
+                    $usuario=0;
                 }
+                if(isset($filtros['ftextoRol']) && $filtros['ftextoRol'] != 0){
+                    $rol=$filtros['ftextoRol'];
+                    $listaPermisosUsuarioORol=$this->modelo->buscarPermisosRol($rol);
+                } else {
+                    $rol=0;
+                }
+
+                // echo '<pre>';
+                // print_r($listaPermisosUsuarioORol);
+                // echo '</pre>';
+
+                // echo '<pre>';
+                // print_r($listaPermisosUsuarioPorRol);
+                // echo '</pre>';
+
+                Vista::render('vistas/menu/V_Menu_Listado.php',array('opcionesMenu'=>$opcionesMenu, 'usuario'=>$usuario, 'rol'=>$rol, 'permisos'=>$permisos, 'listaPermisosUsuarioORol'=>$listaPermisosUsuarioORol, 'listaPermisosUsuarioPorRol'=>$listaPermisosUsuarioPorRol));
             } else {
-                $usuario=0;
+                echo 'No se puede realizar la búsqueda por Usuario y Rol al mismo tiempo';
             }
-            if(isset($filtros['ftextoRol']) && $filtros['ftextoRol'] != 0){
-                $rol=$filtros['ftextoRol'];
-                $listaPermisosUsuarioORol=$this->modelo->buscarPermisosRol($rol);
-            } else {
-                $rol=0;
-            }
-
-            // echo '<pre>';
-            // print_r($listaPermisosUsuarioORol);
-            // echo '</pre>';
-
-            // echo '<pre>';
-            // print_r($listaPermisosUsuarioPorRol);
-            // echo '</pre>';
-
-            Vista::render('vistas/menu/V_Menu_Listado.php',array('opcionesMenu'=>$opcionesMenu, 'usuario'=>$usuario, 'rol'=>$rol, 'permisos'=>$permisos, 'listaPermisosUsuarioORol'=>$listaPermisosUsuarioORol, 'listaPermisosUsuarioPorRol'=>$listaPermisosUsuarioPorRol));
         }
 
         public function getVistaNuevoEditar($datos=array()){
