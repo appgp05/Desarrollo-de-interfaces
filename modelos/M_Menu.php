@@ -171,7 +171,7 @@ class M_Menu extends Modelo{
 
         $response = $this->DAO->insertar($SQL);
 
-        $SQL="INSERT INTO permisosusuarios VALUES (2, ".$response.")";
+        $SQL="INSERT INTO permisosroles VALUES (2, ".$response.")";
         $this->DAO->insertar($SQL);
 
         return $response;

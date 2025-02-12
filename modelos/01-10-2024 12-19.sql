@@ -251,18 +251,18 @@ DROP TABLE IF EXISTS permisosusuarios;
   `id_Permiso` int(11) NOT NULL,
   PRIMARY KEY (`id_Usuario`, `id_Permiso`)
 );
-INSERT INTO `permisosusuarios` VALUES
-(2, 6);
-INSERT INTO `permisosusuarios` VALUES
-(2, 8);
-INSERT INTO `permisosusuarios` VALUES
-(2, 9);
-INSERT INTO `permisosusuarios` VALUES
-(2, 10);
-INSERT INTO `permisosusuarios` VALUES
-(2, 11);
-INSERT INTO `permisosusuarios` VALUES
-(2, 12);
+-- INSERT INTO `permisosusuarios` VALUES
+-- (2, 6);
+-- INSERT INTO `permisosusuarios` VALUES
+-- (2, 8);
+-- INSERT INTO `permisosusuarios` VALUES
+-- (2, 9);
+-- INSERT INTO `permisosusuarios` VALUES
+-- (2, 10);
+-- INSERT INTO `permisosusuarios` VALUES
+-- (2, 11);
+-- INSERT INTO `permisosusuarios` VALUES
+-- (2, 12);
 
 DROP TABLE IF EXISTS permisosroles;
 CREATE TABLE `permisosroles` (
@@ -285,6 +285,19 @@ INSERT INTO `permisosroles` VALUES
 INSERT INTO `permisosroles` VALUES
 (1, 7);
 
+INSERT INTO `permisosroles` VALUES
+(2, 6);
+INSERT INTO `permisosroles` VALUES
+(2, 8);
+INSERT INTO `permisosroles` VALUES
+(2, 9);
+INSERT INTO `permisosroles` VALUES
+(2, 10);
+INSERT INTO `permisosroles` VALUES
+(2, 11);
+INSERT INTO `permisosroles` VALUES
+(2, 12);
+
 DROP TABLE IF EXISTS roles;
 CREATE TABLE `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -293,6 +306,8 @@ CREATE TABLE `roles` (
 );
 INSERT INTO `roles` (`rol`) VALUES
 ('visitante');
+INSERT INTO `roles` (`rol`) VALUES
+('admin');
 INSERT INTO `roles` (`rol`) VALUES
 ('rol1');
 INSERT INTO `roles` (`rol`) VALUES
@@ -307,7 +322,9 @@ CREATE TABLE `rolesusuarios` (
 );
 
 INSERT INTO `rolesusuarios` VALUES
-(1, 2);
+(1, 3);
+INSERT INTO `rolesusuarios` VALUES
+(2, 2);
 
 --
 -- Índices para tablas volcadas

@@ -107,12 +107,20 @@ class V_Menu_PermisosOpcionfila{
                     //     }
                     // }
                     
+                    $fisrtTime = true;
+
                     foreach ($listaPermisosUsuarioPorRol as $permisoUsuarioPorRol) {
                         // Extraemos el array que contiene los permisos
                         $permisos = array_column([$permisoUsuarioPorRol[0]], 'id_Permiso');
                     
                         // Verificamos si el permiso está en la lista de permisos
+                        
                         if (in_array($permiso['id'], $permisos)) {
+                            if($fisrtTime){
+                                $fisrtTime = false;
+                                $html.="<p><b>Permiso concedido por los siguientes roles:</b></p>";
+                            }
+                            
                             $html .= '<p class="backgroundRoles">'.$permisoUsuarioPorRol[1]['rol'].'</p>';
                             // echo 'asdasd';
                         }
