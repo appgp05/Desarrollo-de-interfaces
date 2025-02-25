@@ -302,8 +302,11 @@ class M_Menu extends Modelo{
         $id='';
         extract($datos);
 
-        $SQL="DELETE FROM roles WHERE id = $id";
-        $this->DAO->borrar($SQL);
+        if($id == 2){
+        } else {
+            $SQL="DELETE FROM roles WHERE id = $id";
+            $this->DAO->borrar($SQL);
+        }
     }
 
     public function añadirRolUsuario($usuario, $rol){
@@ -312,8 +315,11 @@ class M_Menu extends Modelo{
     }
 
     public function eliminarRolUsuario($usuario, $rol){
-        $SQL="DELETE FROM rolesusuarios WHERE id_Usuario = $usuario AND id_rol = $rol";
-        $this->DAO->borrar($SQL);
+        if($usuario == 2 && $rol == 2){
+        } else {
+            $SQL="DELETE FROM rolesusuarios WHERE id_Usuario = $usuario AND id_rol = $rol";
+            $this->DAO->borrar($SQL);
+        }
     }
 }
 ?>
